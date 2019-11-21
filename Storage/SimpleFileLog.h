@@ -17,10 +17,10 @@
 #include <string>
 #include <vector>
 
-#include "build/Storage/SimpleFileLog.pb.h"
-#include "Storage/FilesystemUtil.h"
-#include "Storage/MemoryLog.h"
-#include "Storage/Log.h"
+#include "../build/Storage/SimpleFileLog.pb.h"
+#include "../Storage/FilesystemUtil.h"
+#include "../Storage/MemoryLog.h"
+#include "../Storage/Log.h"
 
 #ifndef LOGCABIN_STORAGE_SIMPLEFILELOG_H
 #define LOGCABIN_STORAGE_SIMPLEFILELOG_H

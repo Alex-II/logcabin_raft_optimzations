@@ -16,7 +16,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/Util.h"
+#include "../Core/Util.h"
 
 namespace LogCabin {
 namespace Core {

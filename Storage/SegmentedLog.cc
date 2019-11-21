@@ -22,17 +22,17 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "build/Protocol/Raft.pb.h"
-#include "Core/Checksum.h"
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Core/StringUtil.h"
-#include "Core/ThreadId.h"
-#include "Core/Time.h"
-#include "Core/Util.h"
-#include "Storage/FilesystemUtil.h"
-#include "Storage/SegmentedLog.h"
-#include "Server/Globals.h"
+#include "../build/Protocol/Raft.pb.h"
+#include "../Core/Checksum.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/StringUtil.h"
+#include "../Core/ThreadId.h"
+#include "../Core/Time.h"
+#include "../Core/Util.h"
+#include "../Storage/FilesystemUtil.h"
+#include "../Storage/SegmentedLog.h"
+#include "../Server/Globals.h"
 
 namespace LogCabin {
 namespace Storage {

@@ -20,7 +20,7 @@
 #include <iostream>
 #include <deque>
 
-#include "Core/Time.h"
+#include "../Core/Time.h"
 
 namespace LogCabin {
 

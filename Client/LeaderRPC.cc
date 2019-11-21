@@ -16,13 +16,13 @@
 
 #include <unistd.h>
 
-#include "Client/Backoff.h"
-#include "Client/LeaderRPC.h"
-#include "Core/Debug.h"
-#include "Core/Util.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientSession.h"
-#include "RPC/ClientRPC.h"
+#include "../Client/Backoff.h"
+#include "../Client/LeaderRPC.h"
+#include "../Core/Debug.h"
+#include "../Core/Util.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientSession.h"
+#include "../RPC/ClientRPC.h"
 
 namespace LogCabin {
 namespace Client {

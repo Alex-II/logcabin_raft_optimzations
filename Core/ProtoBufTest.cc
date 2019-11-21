@@ -15,9 +15,9 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "build/Core/ProtoBufTest.pb.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../build/Core/ProtoBufTest.pb.h"
 
 namespace LogCabin {
 namespace Core {

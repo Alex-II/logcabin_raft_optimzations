@@ -17,12 +17,12 @@
 #include <gtest/gtest.h>
 #include <thread>
 
-#include "Core/Debug.h"
-#include "Event/Loop.h"
-#include "Protocol/Common.h"
-#include "RPC/Address.h"
-#include "RPC/OpaqueServer.h"
-#include "RPC/OpaqueServerRPC.h"
+#include "../Core/Debug.h"
+#include "../Event/Loop.h"
+#include "../Protocol/Common.h"
+#include "../RPC/Address.h"
+#include "../RPC/OpaqueServer.h"
+#include "../RPC/OpaqueServerRPC.h"
 
 namespace LogCabin {
 namespace RPC {

@@ -20,12 +20,12 @@
 #include <iostream>
 #include <string>
 
-#include "Core/Debug.h"
-#include "Core/StringUtil.h"
-#include "Core/ThreadId.h"
-#include "Core/Util.h"
-#include "Server/Globals.h"
-#include "Server/RaftConsensus.h"
+#include "../Core/Debug.h"
+#include "../Core/StringUtil.h"
+#include "../Core/ThreadId.h"
+#include "../Core/Util.h"
+#include "../Server/Globals.h"
+#include "../Server/RaftConsensus.h"
 
 namespace {
 
@@ -274,7 +274,6 @@ class PidFile {
 int
 main(int argc, char** argv)
 {
-    // test comment 4
     using namespace LogCabin;
 
     try {

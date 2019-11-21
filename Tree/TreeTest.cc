@@ -19,11 +19,11 @@
 #include <stdexcept>
 #include <sys/stat.h>
 
-#include "Core/StringUtil.h"
-#include "Tree/Tree.h"
-#include "Storage/FilesystemUtil.h"
-#include "Storage/Layout.h"
-#include "Storage/SnapshotFile.h"
+#include "../Core/StringUtil.h"
+#include "../Tree/Tree.h"
+#include "../Storage/FilesystemUtil.h"
+#include "../Storage/Layout.h"
+#include "../Storage/SnapshotFile.h"
 
 namespace LogCabin {
 namespace Tree {

@@ -17,8 +17,8 @@
 #include <cinttypes>
 #include <google/protobuf/message.h>
 
-#include "RPC/Protocol.h"
-#include "RPC/OpaqueServerRPC.h"
+#include "../RPC/Protocol.h"
+#include "../RPC/OpaqueServerRPC.h"
 
 #ifndef LOGCABIN_RPC_SERVERRPC_H
 #define LOGCABIN_RPC_SERVERRPC_H

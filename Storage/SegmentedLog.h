@@ -18,13 +18,13 @@
 #include <thread>
 #include <vector>
 
-#include "build/Storage/SegmentedLog.pb.h"
-#include "Core/Buffer.h"
-#include "Core/ConditionVariable.h"
-#include "Core/Mutex.h"
-#include "Core/RollingStat.h"
-#include "Storage/FilesystemUtil.h"
-#include "Storage/Log.h"
+#include "../build/Storage/SegmentedLog.pb.h"
+#include "../Core/Buffer.h"
+#include "../Core/ConditionVariable.h"
+#include "../Core/Mutex.h"
+#include "../Core/RollingStat.h"
+#include "../Storage/FilesystemUtil.h"
+#include "../Storage/Log.h"
 
 #ifndef LOGCABIN_STORAGE_SEGMENTEDLOG_H
 #define LOGCABIN_STORAGE_SEGMENTEDLOG_H

@@ -18,7 +18,7 @@
 #include <vector>
 #include <gtest/gtest.h>
 
-#include "Core/STLUtil.h"
+#include "../Core/STLUtil.h"
 
 namespace LogCabin {
 namespace Core {

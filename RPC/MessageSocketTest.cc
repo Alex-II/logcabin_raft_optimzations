@@ -20,9 +20,9 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-#include "Core/Debug.h"
-#include "Event/Loop.h"
-#include "RPC/MessageSocket.h"
+#include "../Core/Debug.h"
+#include "../Event/Loop.h"
+#include "../RPC/MessageSocket.h"
 
 namespace LogCabin {
 namespace RPC {

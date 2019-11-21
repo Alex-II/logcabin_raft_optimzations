@@ -23,11 +23,11 @@
 #include <sstream>
 #include <vector>
 
-#include "Core/Debug.h"
-#include "Core/Endian.h"
-#include "Core/Random.h"
-#include "Core/StringUtil.h"
-#include "RPC/Address.h"
+#include "../Core/Debug.h"
+#include "../Core/Endian.h"
+#include "../Core/Random.h"
+#include "../Core/StringUtil.h"
+#include "../RPC/Address.h"
 
 namespace LogCabin {
 namespace RPC {

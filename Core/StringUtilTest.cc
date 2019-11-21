@@ -18,7 +18,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/StringUtil.h"
+#include "../Core/StringUtil.h"
 
 namespace LogCabin {
 namespace Core {

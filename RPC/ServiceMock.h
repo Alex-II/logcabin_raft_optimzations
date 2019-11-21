@@ -18,9 +18,9 @@
 #include <memory>
 #include <queue>
 
-#include "Core/ProtoBuf.h"
-#include "RPC/Service.h"
-#include "RPC/ServerRPC.h"
+#include "../Core/ProtoBuf.h"
+#include "../RPC/Service.h"
+#include "../RPC/ServerRPC.h"
 
 #ifndef LOGCABIN_RPC_SERVICEMOCK_H
 #define LOGCABIN_RPC_SERVICEMOCK_H

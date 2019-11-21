@@ -13,7 +13,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Core/Buffer.h"
+#include "../Core/Buffer.h"
 
 namespace LogCabin {
 namespace Core {

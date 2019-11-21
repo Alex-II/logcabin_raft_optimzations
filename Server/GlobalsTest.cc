@@ -15,10 +15,10 @@
 
 #include <gtest/gtest.h>
 
-#include "Protocol/Common.h"
-#include "RPC/Address.h"
-#include "RPC/Server.h"
-#include "Server/Globals.h"
+#include "../Protocol/Common.h"
+#include "../RPC/Address.h"
+#include "../RPC/Server.h"
+#include "../Server/Globals.h"
 
 namespace LogCabin {
 namespace Server {

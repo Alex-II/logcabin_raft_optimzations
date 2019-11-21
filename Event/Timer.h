@@ -17,8 +17,8 @@
 #ifndef LOGCABIN_EVENT_TIMER_H
 #define LOGCABIN_EVENT_TIMER_H
 
-#include "Core/Time.h"
-#include "Event/File.h"
+#include "../Core/Time.h"
+#include "../Event/File.h"
 
 namespace LogCabin {
 namespace Event {

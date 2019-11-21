@@ -17,15 +17,15 @@
 #include <gtest/gtest.h>
 #include <thread>
 
-#include "build/Protocol/Client.pb.h"
-#include "include/LogCabin/Debug.h"
-#include "Core/Buffer.h"
-#include "Core/ProtoBuf.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientRPC.h"
-#include "RPC/ClientSession.h"
-#include "Server/Globals.h"
-#include "Storage/FilesystemUtil.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../include/LogCabin/Debug.h"
+#include "../Core/Buffer.h"
+#include "../Core/ProtoBuf.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientRPC.h"
+#include "../RPC/ClientSession.h"
+#include "../Server/Globals.h"
+#include "../Storage/FilesystemUtil.h"
 
 namespace LogCabin {
 namespace Server {

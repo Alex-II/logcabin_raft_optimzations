@@ -13,8 +13,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "build/Protocol/Client.pb.h"
-#include "Tree/Tree.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../Tree/Tree.h"
 
 #ifndef LOGCABIN_TREE_PROTOBUF_H
 #define LOGCABIN_TREE_PROTOBUF_H

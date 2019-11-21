@@ -19,9 +19,9 @@
 #include <stdexcept>
 #include <string>
 
-#include "Core/CompatAtomic.h"
-#include "Core/ProtoBuf.h"
-#include "Storage/FilesystemUtil.h"
+#include "../Core/CompatAtomic.h"
+#include "../Core/ProtoBuf.h"
+#include "../Storage/FilesystemUtil.h"
 
 #ifndef LOGCABIN_STORAGE_SNAPSHOTFILE_H
 #define LOGCABIN_STORAGE_SNAPSHOTFILE_H

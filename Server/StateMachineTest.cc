@@ -19,17 +19,17 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 
-#include "build/Protocol/Raft.pb.h"
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Core/StringUtil.h"
-#include "Core/STLUtil.h"
-#include "Server/Globals.h"
-#include "Server/RaftConsensus.h"
-#include "Server/StateMachine.h"
-#include "Storage/FilesystemUtil.h"
-#include "Storage/MemoryLog.h"
-#include "Storage/SnapshotFile.h"
+#include "../build/Protocol/Raft.pb.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/StringUtil.h"
+#include "../Core/STLUtil.h"
+#include "../Server/Globals.h"
+#include "../Server/RaftConsensus.h"
+#include "../Server/StateMachine.h"
+#include "../Storage/FilesystemUtil.h"
+#include "../Storage/MemoryLog.h"
+#include "../Storage/SnapshotFile.h"
 
 namespace LogCabin {
 namespace Server {

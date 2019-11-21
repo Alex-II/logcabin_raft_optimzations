@@ -45,8 +45,8 @@
 #include <cxxabi.h>
 #include <fstream>
 
-#include "Core/Config.h"
-#include "Core/StringUtil.h"
+#include "../Core/Config.h"
+#include "../Core/StringUtil.h"
 
 namespace LogCabin {
 namespace Core {

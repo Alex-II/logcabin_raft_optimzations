@@ -16,10 +16,10 @@
 
 #include <string.h>
 
-#include "include/LogCabin/Client.h"
-#include "Client/ClientImpl.h"
-#include "Client/MockClientImpl.h"
-#include "Core/StringUtil.h"
+#include "../include/LogCabin/Client.h"
+#include "../Client/ClientImpl.h"
+#include "../Client/MockClientImpl.h"
+#include "../Core/StringUtil.h"
 
 namespace LogCabin {
 namespace Client {

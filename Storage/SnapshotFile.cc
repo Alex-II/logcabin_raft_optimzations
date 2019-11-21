@@ -20,12 +20,12 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "Core/Debug.h"
-#include "Core/StringUtil.h"
-#include "Core/Time.h"
-#include "Core/Util.h"
-#include "Storage/Layout.h"
-#include "Storage/SnapshotFile.h"
+#include "../Core/Debug.h"
+#include "../Core/StringUtil.h"
+#include "../Core/Time.h"
+#include "../Core/Util.h"
+#include "../Storage/Layout.h"
+#include "../Storage/SnapshotFile.h"
 
 namespace LogCabin {
 namespace Storage {

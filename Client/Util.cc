@@ -13,9 +13,9 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Core/Time.h"
-#include "include/LogCabin/Client.h"
-#include "include/LogCabin/Util.h"
+#include "../Core/Time.h"
+#include "../include/LogCabin/Client.h"
+#include "../include/LogCabin/Util.h"
 
 namespace LogCabin {
 namespace Client {

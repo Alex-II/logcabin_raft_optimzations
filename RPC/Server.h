@@ -19,8 +19,8 @@
 #include <mutex>
 #include <unordered_map>
 
-#include "RPC/OpaqueServer.h"
-#include "RPC/Service.h"
+#include "../RPC/OpaqueServer.h"
+#include "../RPC/Service.h"
 
 #ifndef LOGCABIN_RPC_SERVER_H
 #define LOGCABIN_RPC_SERVER_H

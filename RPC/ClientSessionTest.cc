@@ -20,12 +20,12 @@
 #include <thread>
 #include <unistd.h>
 
-#include "Core/CompatAtomic.h"
-#include "Core/Debug.h"
-#include "Event/Loop.h"
-#include "Event/Timer.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientSession.h"
+#include "../Core/CompatAtomic.h"
+#include "../Core/Debug.h"
+#include "../Event/Loop.h"
+#include "../Event/Timer.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientSession.h"
 
 namespace LogCabin {
 namespace RPC {

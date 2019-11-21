@@ -16,7 +16,7 @@
 #ifndef LOGCABIN_STORAGE_LAYOUT_H
 #define LOGCABIN_STORAGE_LAYOUT_H
 
-#include "Storage/FilesystemUtil.h"
+#include "../Storage/FilesystemUtil.h"
 
 namespace LogCabin {
 

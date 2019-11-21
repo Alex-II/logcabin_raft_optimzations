@@ -13,7 +13,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "RPC/OpaqueServerRPC.h"
+#include "../RPC/OpaqueServerRPC.h"
 
 namespace LogCabin {
 namespace RPC {

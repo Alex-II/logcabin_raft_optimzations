@@ -16,7 +16,7 @@
 #include <gtest/gtest.h>
 #include <unordered_set>
 
-#include "Core/CompatHash.h"
+#include "../Core/CompatHash.h"
 
 namespace LogCabin {
 namespace Core {

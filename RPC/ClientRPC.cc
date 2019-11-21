@@ -14,11 +14,11 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "RPC/Protocol.h"
-#include "RPC/ClientRPC.h"
-#include "RPC/ClientSession.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../RPC/Protocol.h"
+#include "../RPC/ClientRPC.h"
+#include "../RPC/ClientSession.h"
 
 namespace LogCabin {
 namespace RPC {

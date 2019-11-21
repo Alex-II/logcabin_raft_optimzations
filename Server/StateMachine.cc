@@ -18,17 +18,17 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "Core/Debug.h"
-#include "Core/Mutex.h"
-#include "Core/ProtoBuf.h"
-#include "Core/Random.h"
-#include "Core/ThreadId.h"
-#include "Core/Util.h"
-#include "Server/Globals.h"
-#include "Server/RaftConsensus.h"
-#include "Server/StateMachine.h"
-#include "Storage/SnapshotFile.h"
-#include "Tree/ProtoBuf.h"
+#include "../Core/Debug.h"
+#include "../Core/Mutex.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/Random.h"
+#include "../Core/ThreadId.h"
+#include "../Core/Util.h"
+#include "../Server/Globals.h"
+#include "../Server/RaftConsensus.h"
+#include "../Server/StateMachine.h"
+#include "../Storage/SnapshotFile.h"
+#include "../Tree/ProtoBuf.h"
 
 namespace LogCabin {
 namespace Server {

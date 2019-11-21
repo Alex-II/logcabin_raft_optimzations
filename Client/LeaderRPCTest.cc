@@ -17,15 +17,15 @@
 #include <gtest/gtest.h>
 #include <thread>
 
-#include "Client/Backoff.h"
-#include "Client/LeaderRPC.h"
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Event/Loop.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientSession.h"
-#include "RPC/Server.h"
-#include "RPC/ServiceMock.h"
+#include "../Client/Backoff.h"
+#include "../Client/LeaderRPC.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Event/Loop.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientSession.h"
+#include "../RPC/Server.h"
+#include "../RPC/ServiceMock.h"
 
 namespace LogCabin {
 namespace Client {

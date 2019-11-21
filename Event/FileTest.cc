@@ -18,8 +18,8 @@
 #include <sys/epoll.h>
 #include <unistd.h>
 
-#include "Event/File.h"
-#include "Event/Loop.h"
+#include "../Event/File.h"
+#include "../Event/Loop.h"
 
 namespace LogCabin {
 namespace Event {

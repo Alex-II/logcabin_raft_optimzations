@@ -15,7 +15,7 @@
 
 #include <gtest/gtest.h>
 #include <stdexcept>
-#include "Storage/MemoryLog.h"
+#include "../Storage/MemoryLog.h"
 
 namespace LogCabin {
 namespace Storage {

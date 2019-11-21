@@ -21,7 +21,7 @@
 #include <string>
 #include <vector>
 
-#include "Core/Time.h"
+#include "../Core/Time.h"
 
 namespace LogCabin {
 namespace RPC {

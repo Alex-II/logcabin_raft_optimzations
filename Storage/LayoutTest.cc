@@ -15,7 +15,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Storage/Layout.h"
+#include "../Storage/Layout.h"
 
 namespace LogCabin {
 namespace Storage {

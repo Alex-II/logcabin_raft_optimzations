@@ -19,7 +19,7 @@
 #include <iostream>
 #include <time.h>
 
-#include "Core/StringUtil.h"
+#include "../Core/StringUtil.h"
 
 #ifndef LOGCABIN_CORE_TIME_H
 #define LOGCABIN_CORE_TIME_H

@@ -21,19 +21,19 @@
 #include <thread>
 #include <unordered_map>
 
-#include "build/Protocol/Client.pb.h"
-#include "build/Protocol/Raft.pb.h"
-#include "build/Protocol/ServerStats.pb.h"
-#include "build/Server/SnapshotStats.pb.h"
-#include "Client/SessionManager.h"
-#include "Core/CompatAtomic.h"
-#include "Core/ConditionVariable.h"
-#include "Core/Mutex.h"
-#include "Core/Time.h"
-#include "RPC/ClientRPC.h"
-#include "Storage/Layout.h"
-#include "Storage/Log.h"
-#include "Storage/SnapshotFile.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../build/Protocol/Raft.pb.h"
+#include "../build/Protocol/ServerStats.pb.h"
+#include "../build/Server/SnapshotStats.pb.h"
+#include "../Client/SessionManager.h"
+#include "../Core/CompatAtomic.h"
+#include "../Core/ConditionVariable.h"
+#include "../Core/Mutex.h"
+#include "../Core/Time.h"
+#include "../RPC/ClientRPC.h"
+#include "../Storage/Layout.h"
+#include "../Storage/Log.h"
+#include "../Storage/SnapshotFile.h"
 
 #ifndef LOGCABIN_SERVER_RAFTCONSENSUS_H
 #define LOGCABIN_SERVER_RAFTCONSENSUS_H

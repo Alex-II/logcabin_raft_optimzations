@@ -18,21 +18,21 @@
 #include <gtest/gtest.h>
 #include <sys/stat.h>
 
-#include "build/Protocol/Raft.pb.h"
-#include "Core/ProtoBuf.h"
-#include "Core/STLUtil.h"
-#include "Core/StringUtil.h"
-#include "Core/Time.h"
-#include "Core/Util.h"
-#include "Protocol/Common.h"
-#include "RPC/Address.h"
-#include "RPC/ServiceMock.h"
-#include "RPC/Server.h"
-#include "Server/RaftConsensus.h"
-#include "Server/Globals.h"
-#include "Storage/MemoryLog.h"
-#include "Storage/SnapshotFile.h"
-#include "include/LogCabin/Debug.h"
+#include "../build/Protocol/Raft.pb.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/STLUtil.h"
+#include "../Core/StringUtil.h"
+#include "../Core/Time.h"
+#include "../Core/Util.h"
+#include "../Protocol/Common.h"
+#include "../RPC/Address.h"
+#include "../RPC/ServiceMock.h"
+#include "../RPC/Server.h"
+#include "../Server/RaftConsensus.h"
+#include "../Server/Globals.h"
+#include "../Storage/MemoryLog.h"
+#include "../Storage/SnapshotFile.h"
+#include "../include/LogCabin/Debug.h"
 
 namespace LogCabin {
 namespace Server {

@@ -16,8 +16,8 @@
 #include <map>
 #include <unordered_map>
 #include <vector>
-#include "include/LogCabin/Client.h"
-#include "Client/ClientImpl.h"
+#include "../include/LogCabin/Client.h"
+#include "../Client/ClientImpl.h"
 
 #ifndef LOGCABIN_CLIENT_MOCKCLIENTIMPL_H
 #define LOGCABIN_CLIENT_MOCKCLIENTIMPL_H

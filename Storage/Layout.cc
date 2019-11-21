@@ -17,10 +17,10 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "Core/Config.h"
-#include "Core/Debug.h"
-#include "Core/StringUtil.h"
-#include "Storage/Layout.h"
+#include "../Core/Config.h"
+#include "../Core/Debug.h"
+#include "../Core/StringUtil.h"
+#include "../Storage/Layout.h"
 
 namespace LogCabin {
 namespace Storage {

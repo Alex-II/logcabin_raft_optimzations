@@ -17,9 +17,9 @@
 #include <deque>
 #include <vector>
 
-#include "Core/Buffer.h"
-#include "Core/Mutex.h"
-#include "Event/File.h"
+#include "../Core/Buffer.h"
+#include "../Core/Mutex.h"
+#include "../Event/File.h"
 
 #ifndef LOGCABIN_RPC_MESSAGESOCKET_H
 #define LOGCABIN_RPC_MESSAGESOCKET_H

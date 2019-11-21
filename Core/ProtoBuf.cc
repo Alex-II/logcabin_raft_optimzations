@@ -17,10 +17,10 @@
 #include <memory>
 #include <sstream>
 
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Core/StringUtil.h"
-#include "Core/Util.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/StringUtil.h"
+#include "../Core/Util.h"
 
 namespace google {
 namespace protobuf {

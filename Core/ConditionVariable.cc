@@ -16,8 +16,8 @@
 
 #include <cstring>
 
-#include "Core/ConditionVariable.h"
-#include "Core/Debug.h"
+#include "../Core/ConditionVariable.h"
+#include "../Core/Debug.h"
 
 namespace LogCabin {
 namespace Core {

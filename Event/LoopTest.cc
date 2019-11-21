@@ -16,8 +16,8 @@
 #include <gtest/gtest.h>
 #include <thread>
 
-#include "Event/Loop.h"
-#include "Event/Timer.h"
+#include "../Event/Loop.h"
+#include "../Event/Timer.h"
 
 namespace LogCabin {
 namespace Event {

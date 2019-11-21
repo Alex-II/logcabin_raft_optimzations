@@ -16,14 +16,14 @@
 
 #include <algorithm>
 
-#include "Core/Debug.h"
-#include "Client/ClientImpl.h"
-#include "Core/ProtoBuf.h"
-#include "Core/StringUtil.h"
-#include "Protocol/Common.h"
-#include "RPC/Address.h"
-#include "RPC/ClientRPC.h"
-#include "RPC/ClientSession.h"
+#include "../Core/Debug.h"
+#include "../Client/ClientImpl.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/StringUtil.h"
+#include "../Protocol/Common.h"
+#include "../RPC/Address.h"
+#include "../RPC/ClientRPC.h"
+#include "../RPC/ClientSession.h"
 
 namespace LogCabin {
 namespace Client {

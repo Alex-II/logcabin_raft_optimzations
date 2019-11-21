@@ -22,19 +22,19 @@
 #include <iostream>
 #include <string>
 
-#include "build/Server/SnapshotMetadata.pb.h"
-#include "build/Server/SnapshotStateMachine.pb.h"
-#include "Core/Config.h"
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Core/StringUtil.h"
-#include "Core/ThreadId.h"
-#include "Core/Util.h"
-#include "Storage/Layout.h"
-#include "Storage/Log.h"
-#include "Storage/LogFactory.h"
-#include "Storage/SnapshotFile.h"
-#include "Tree/Tree.h"
+#include "../build/Server/SnapshotMetadata.pb.h"
+#include "../build/Server/SnapshotStateMachine.pb.h"
+#include "../Core/Config.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/StringUtil.h"
+#include "../Core/ThreadId.h"
+#include "../Core/Util.h"
+#include "../Storage/Layout.h"
+#include "../Storage/Log.h"
+#include "../Storage/LogFactory.h"
+#include "../Storage/SnapshotFile.h"
+#include "../Tree/Tree.h"
 
 namespace {
 

@@ -13,7 +13,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Client/Backoff.h"
+#include "../Client/Backoff.h"
 
 namespace LogCabin {
 namespace Client {

@@ -18,7 +18,7 @@
 #include <thread>
 #include <unordered_map>
 
-#include "Core/ThreadId.h"
+#include "../Core/ThreadId.h"
 
 namespace LogCabin {
 namespace Core {

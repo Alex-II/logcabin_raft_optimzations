@@ -16,16 +16,16 @@
 
 #include <gtest/gtest.h>
 
-#include "Client/ClientImpl.h"
-#include "Client/LeaderRPCMock.h"
-#include "Core/ProtoBuf.h"
-#include "Core/StringUtil.h"
-#include "Core/Time.h"
-#include "Protocol/Common.h"
-#include "RPC/Server.h"
-#include "RPC/ServiceMock.h"
-#include "build/Protocol/Client.pb.h"
-#include "include/LogCabin/Debug.h"
+#include "../Client/ClientImpl.h"
+#include "../Client/LeaderRPCMock.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/StringUtil.h"
+#include "../Core/Time.h"
+#include "../Protocol/Common.h"
+#include "../RPC/Server.h"
+#include "../RPC/ServiceMock.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../include/LogCabin/Debug.h"
 
 // Most of the tests for ClientImpl are in ClientTest.cc.
 

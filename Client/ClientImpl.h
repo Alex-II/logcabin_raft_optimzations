@@ -19,16 +19,16 @@
 #include <string>
 #include <thread>
 
-#include "build/Protocol/ServerControl.pb.h"
-#include "include/LogCabin/Client.h"
-#include "Client/Backoff.h"
-#include "Client/LeaderRPC.h"
-#include "Client/SessionManager.h"
-#include "Core/ConditionVariable.h"
-#include "Core/Config.h"
-#include "Core/Mutex.h"
-#include "Core/Time.h"
-#include "Event/Loop.h"
+#include "../build/Protocol/ServerControl.pb.h"
+#include "../include/LogCabin/Client.h"
+#include "../Client/Backoff.h"
+#include "../Client/LeaderRPC.h"
+#include "../Client/SessionManager.h"
+#include "../Core/ConditionVariable.h"
+#include "../Core/Config.h"
+#include "../Core/Mutex.h"
+#include "../Core/Time.h"
+#include "../Event/Loop.h"
 
 #ifndef LOGCABIN_CLIENT_CLIENTIMPL_H
 #define LOGCABIN_CLIENT_CLIENTIMPL_H

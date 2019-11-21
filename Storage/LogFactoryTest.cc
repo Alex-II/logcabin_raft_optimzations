@@ -18,14 +18,14 @@
 #include <gtest/gtest.h>
 #include <sys/stat.h>
 
-#include "Core/Config.h"
-#include "Core/Debug.h"
-#include "Core/StringUtil.h"
-#include "Storage/Layout.h"
-#include "Storage/LogFactory.h"
-#include "Storage/MemoryLog.h"
-#include "Storage/SegmentedLog.h"
-#include "Storage/SimpleFileLog.h"
+#include "../Core/Config.h"
+#include "../Core/Debug.h"
+#include "../Core/StringUtil.h"
+#include "../Storage/Layout.h"
+#include "../Storage/LogFactory.h"
+#include "../Storage/MemoryLog.h"
+#include "../Storage/SegmentedLog.h"
+#include "../Storage/SimpleFileLog.h"
 
 namespace LogCabin {
 namespace Storage {

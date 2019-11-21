@@ -19,11 +19,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "build/Protocol/Client.pb.h"
-#include "build/Protocol/Raft.pb.h"
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Storage/Log.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../build/Protocol/Raft.pb.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Storage/Log.h"
 
 namespace LogCabin {
 namespace Storage {

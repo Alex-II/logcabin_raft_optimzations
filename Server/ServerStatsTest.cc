@@ -15,8 +15,8 @@
 
 #include <gtest/gtest.h>
 
-#include "Server/Globals.h"
-#include "Server/ServerStats.h"
+#include "../Server/Globals.h"
+#include "../Server/ServerStats.h"
 
 namespace LogCabin {
 namespace Server {

@@ -20,8 +20,8 @@
 #include <stdexcept>
 #include <string>
 
-#include "Core/Buffer.h"
-#include "Core/Time.h"
+#include "../Core/Buffer.h"
+#include "../Core/Time.h"
 
 #ifndef LOGCABIN_RPC_OPAQUECLIENTRPC_H
 #define LOGCABIN_RPC_OPAQUECLIENTRPC_H

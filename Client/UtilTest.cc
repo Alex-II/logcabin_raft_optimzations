@@ -15,8 +15,8 @@
 
 #include <gtest/gtest.h>
 
-#include "include/LogCabin/Client.h"
-#include "include/LogCabin/Util.h"
+#include "../include/LogCabin/Client.h"
+#include "../include/LogCabin/Util.h"
 
 namespace LogCabin {
 namespace Client {

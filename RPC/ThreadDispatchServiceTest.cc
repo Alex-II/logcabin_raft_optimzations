@@ -16,8 +16,8 @@
 #include <gtest/gtest.h>
 #include <unistd.h>
 
-#include "Core/CompatAtomic.h"
-#include "RPC/ThreadDispatchService.h"
+#include "../Core/CompatAtomic.h"
+#include "../RPC/ThreadDispatchService.h"
 
 namespace LogCabin {
 namespace RPC {

@@ -24,9 +24,9 @@
 #include <string>
 #include <vector>
 
-#include "Core/Debug.h"
-#include "Core/STLUtil.h"
-#include "Storage/FilesystemUtil.h"
+#include "../Core/Debug.h"
+#include "../Core/STLUtil.h"
+#include "../Storage/FilesystemUtil.h"
 
 namespace LogCabin {
 namespace Storage {

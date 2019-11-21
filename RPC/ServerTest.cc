@@ -16,16 +16,16 @@
 #include <gtest/gtest.h>
 #include <thread>
 
-#include "build/Core/ProtoBufTest.pb.h"
-#include "Core/Buffer.h"
-#include "Core/Debug.h"
-#include "Event/Loop.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientRPC.h"
-#include "RPC/ClientSession.h"
-#include "RPC/Server.h"
-#include "RPC/ServerRPC.h"
-#include "RPC/ServiceMock.h"
+#include "../build/Core/ProtoBufTest.pb.h"
+#include "../Core/Buffer.h"
+#include "../Core/Debug.h"
+#include "../Event/Loop.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientRPC.h"
+#include "../RPC/ClientSession.h"
+#include "../RPC/Server.h"
+#include "../RPC/ServerRPC.h"
+#include "../RPC/ServiceMock.h"
 
 namespace LogCabin {
 namespace RPC {

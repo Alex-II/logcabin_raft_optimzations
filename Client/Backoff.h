@@ -20,7 +20,7 @@
 #include <deque>
 #include <mutex>
 
-#include "Core/Time.h"
+#include "../Core/Time.h"
 
 namespace LogCabin {
 namespace Client {

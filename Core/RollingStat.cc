@@ -15,9 +15,9 @@
 
 #include <cmath>
 
-#include "build/Protocol/ServerStats.pb.h"
-#include "Core/RollingStat.h"
-#include "Core/StringUtil.h"
+#include "../build/Protocol/ServerStats.pb.h"
+#include "../Core/RollingStat.h"
+#include "../Core/StringUtil.h"
 
 namespace LogCabin {
 namespace Core {

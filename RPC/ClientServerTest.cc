@@ -24,16 +24,16 @@
 #include <gtest/gtest.h>
 #include <thread>
 
-#include "Core/Debug.h"
-#include "Event/Loop.h"
-#include "Event/Timer.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientSession.h"
-#include "RPC/OpaqueClientRPC.h"
-#include "RPC/OpaqueServer.h"
-#include "RPC/OpaqueServerRPC.h"
-#include "RPC/Service.h"
-#include "RPC/ThreadDispatchService.h"
+#include "../Core/Debug.h"
+#include "../Event/Loop.h"
+#include "../Event/Timer.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientSession.h"
+#include "../RPC/OpaqueClientRPC.h"
+#include "../RPC/OpaqueServer.h"
+#include "../RPC/OpaqueServerRPC.h"
+#include "../RPC/Service.h"
+#include "../RPC/ThreadDispatchService.h"
 
 namespace LogCabin {
 namespace {

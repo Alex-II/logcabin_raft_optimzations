@@ -18,7 +18,7 @@
 #include <memory>
 #include <string>
 
-#include "Core/Buffer.h"
+#include "../Core/Buffer.h"
 
 /**
  * \file

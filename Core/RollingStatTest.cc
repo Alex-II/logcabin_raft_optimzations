@@ -16,9 +16,9 @@
 #include <cmath>
 #include <gtest/gtest.h>
 
-#include "build/Protocol/ServerStats.pb.h"
-#include "Core/ProtoBuf.h"
-#include "Core/RollingStat.h"
+#include "../build/Protocol/ServerStats.pb.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/RollingStat.h"
 
 namespace LogCabin {
 namespace {

@@ -15,9 +15,9 @@
 
 #include <memory>
 
-#include "Core/Buffer.h"
-#include "RPC/MessageSocket.h"
-#include "RPC/OpaqueServer.h"
+#include "../Core/Buffer.h"
+#include "../RPC/MessageSocket.h"
+#include "../RPC/OpaqueServer.h"
 
 #ifndef LOGCABIN_RPC_OPAQUESERVERRPC_H
 #define LOGCABIN_RPC_OPAQUESERVERRPC_H

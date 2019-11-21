@@ -14,8 +14,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Core/ProtoBuf.h"
-#include "RPC/ServerRPC.h"
+#include "../Core/ProtoBuf.h"
+#include "../RPC/ServerRPC.h"
 
 namespace LogCabin {
 namespace RPC {

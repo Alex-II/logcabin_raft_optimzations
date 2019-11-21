@@ -16,8 +16,8 @@
 #include <gtest/gtest.h>
 #include <stdexcept>
 
-#include "Core/StringUtil.h"
-#include "Core/Time.h"
+#include "../Core/StringUtil.h"
+#include "../Core/Time.h"
 
 namespace LogCabin {
 namespace Core {

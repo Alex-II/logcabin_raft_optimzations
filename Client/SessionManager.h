@@ -21,7 +21,7 @@
 #include <mutex>
 #include <string>
 
-#include "RPC/Address.h"
+#include "../RPC/Address.h"
 
 namespace LogCabin {
 

@@ -17,9 +17,9 @@
 #include <functional>
 #include <pthread.h>
 
-#include "Core/CompatAtomic.h"
-#include "Core/Mutex.h"
-#include "Core/Time.h"
+#include "../Core/CompatAtomic.h"
+#include "../Core/Mutex.h"
+#include "../Core/Time.h"
 
 #ifndef LOGCABIN_CORE_CONDITIONVARIABLE_H
 #define LOGCABIN_CORE_CONDITIONVARIABLE_H

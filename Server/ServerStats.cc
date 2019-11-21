@@ -15,14 +15,14 @@
 
 #include <signal.h>
 
-#include "Core/ProtoBuf.h"
-#include "Core/ThreadId.h"
-#include "Core/Time.h"
-#include "Event/Signal.h"
-#include "Server/Globals.h"
-#include "Server/RaftConsensus.h"
-#include "Server/StateMachine.h"
-#include "Server/ServerStats.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/ThreadId.h"
+#include "../Core/Time.h"
+#include "../Event/Signal.h"
+#include "../Server/Globals.h"
+#include "../Server/RaftConsensus.h"
+#include "../Server/StateMachine.h"
+#include "../Server/ServerStats.h"
 
 namespace LogCabin {
 namespace Server {

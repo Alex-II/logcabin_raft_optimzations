@@ -24,10 +24,10 @@
 #include <sys/uio.h>
 #include <unistd.h>
 
-#include "Core/Debug.h"
-#include "Core/StringUtil.h"
-#include "Core/Util.h"
-#include "Storage/FilesystemUtil.h"
+#include "../Core/Debug.h"
+#include "../Core/StringUtil.h"
+#include "../Core/Util.h"
+#include "../Storage/FilesystemUtil.h"
 
 namespace LogCabin {
 namespace Storage {

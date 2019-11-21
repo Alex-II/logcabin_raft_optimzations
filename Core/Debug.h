@@ -18,7 +18,7 @@
 #include <cstdlib>
 #include <string>
 
-#include "include/LogCabin/Debug.h"
+#include "../include/LogCabin/Debug.h"
 
 #ifndef LOGCABIN_CORE_DEBUG_H
 #define LOGCABIN_CORE_DEBUG_H

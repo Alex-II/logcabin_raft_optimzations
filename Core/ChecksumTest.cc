@@ -15,7 +15,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/Checksum.h"
+#include "../Core/Checksum.h"
 
 namespace LogCabin {
 namespace Core {

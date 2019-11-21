@@ -19,9 +19,9 @@
 #include <thread>
 #include <vector>
 
-#include "Core/ConditionVariable.h"
-#include "RPC/ServerRPC.h"
-#include "RPC/Service.h"
+#include "../Core/ConditionVariable.h"
+#include "../RPC/ServerRPC.h"
+#include "../RPC/Service.h"
 
 #ifndef LOGCABIN_RPC_THREADDISPATCHSERVICE_H
 #define LOGCABIN_RPC_THREADDISPATCHSERVICE_H

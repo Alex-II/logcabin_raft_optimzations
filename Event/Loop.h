@@ -20,9 +20,9 @@
 #include <cinttypes>
 #include <memory>
 
-#include "Core/ConditionVariable.h"
-#include "Core/Mutex.h"
-#include "Event/Timer.h"
+#include "../Core/ConditionVariable.h"
+#include "../Core/Mutex.h"
+#include "../Event/Timer.h"
 
 namespace LogCabin {
 namespace Event {

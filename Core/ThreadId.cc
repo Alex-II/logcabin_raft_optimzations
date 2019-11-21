@@ -16,8 +16,8 @@
 #include <mutex>
 #include <unordered_map>
 
-#include "Core/ThreadId.h"
-#include "Core/StringUtil.h"
+#include "../Core/ThreadId.h"
+#include "../Core/StringUtil.h"
 
 namespace LogCabin {
 namespace Core {

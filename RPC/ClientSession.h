@@ -19,13 +19,13 @@
 #include <string>
 #include <unordered_map>
 
-#include "Core/Buffer.h"
-#include "Core/ConditionVariable.h"
-#include "Core/Config.h"
-#include "Event/Timer.h"
-#include "RPC/Address.h"
-#include "RPC/OpaqueClientRPC.h"
-#include "RPC/MessageSocket.h"
+#include "../Core/Buffer.h"
+#include "../Core/ConditionVariable.h"
+#include "../Core/Config.h"
+#include "../Event/Timer.h"
+#include "../RPC/Address.h"
+#include "../RPC/OpaqueClientRPC.h"
+#include "../RPC/MessageSocket.h"
 
 #ifndef LOGCABIN_RPC_CLIENTSESSION_H
 #define LOGCABIN_RPC_CLIENTSESSION_H

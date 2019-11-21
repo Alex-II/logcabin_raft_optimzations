@@ -20,9 +20,9 @@
 #include <sys/signalfd.h>
 #include <unistd.h>
 
-#include "Core/Debug.h"
-#include "Event/Loop.h"
-#include "Event/Signal.h"
+#include "../Core/Debug.h"
+#include "../Event/Loop.h"
+#include "../Event/Signal.h"
 
 namespace LogCabin {
 namespace Event {

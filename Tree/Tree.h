@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-#include "Core/ProtoBuf.h"
+#include "../Core/ProtoBuf.h"
 
 #ifndef LOGCABIN_TREE_TREE_H
 #define LOGCABIN_TREE_TREE_H

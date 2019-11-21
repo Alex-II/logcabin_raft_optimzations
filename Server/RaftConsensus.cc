@@ -24,22 +24,22 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "build/Protocol/Raft.pb.h"
-#include "build/Server/SnapshotMetadata.pb.h"
-#include "Core/Buffer.h"
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Core/Random.h"
-#include "Core/StringUtil.h"
-#include "Core/ThreadId.h"
-#include "Core/Util.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientRPC.h"
-#include "RPC/ClientSession.h"
-#include "RPC/ServerRPC.h"
-#include "Server/RaftConsensus.h"
-#include "Server/Globals.h"
-#include "Storage/LogFactory.h"
+#include "../build/Protocol/Raft.pb.h"
+#include "../build/Server/SnapshotMetadata.pb.h"
+#include "../Core/Buffer.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/Random.h"
+#include "../Core/StringUtil.h"
+#include "../Core/ThreadId.h"
+#include "../Core/Util.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientRPC.h"
+#include "../RPC/ClientSession.h"
+#include "../RPC/ServerRPC.h"
+#include "../Server/RaftConsensus.h"
+#include "../Server/Globals.h"
+#include "../Storage/LogFactory.h"
 
 namespace LogCabin {
 namespace Server {

@@ -17,15 +17,15 @@
 #include <gtest/gtest.h>
 #include <thread>
 
-#include "build/Protocol/Client.pb.h"
-#include "include/LogCabin/Debug.h"
-#include "Client/SessionManager.h"
-#include "Core/Config.h"
-#include "Event/Loop.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientSession.h"
-#include "RPC/Server.h"
-#include "RPC/ServiceMock.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../include/LogCabin/Debug.h"
+#include "../Client/SessionManager.h"
+#include "../Core/Config.h"
+#include "../Event/Loop.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientSession.h"
+#include "../RPC/Server.h"
+#include "../RPC/ServiceMock.h"
 
 namespace LogCabin {
 namespace Client {

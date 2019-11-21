@@ -19,13 +19,13 @@
 #include <thread>
 #include <unordered_map>
 
-#include "build/Protocol/Client.pb.h"
-#include "build/Server/SnapshotStateMachine.pb.h"
-#include "Core/ConditionVariable.h"
-#include "Core/Config.h"
-#include "Core/Mutex.h"
-#include "Core/Time.h"
-#include "Tree/Tree.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../build/Server/SnapshotStateMachine.pb.h"
+#include "../Core/ConditionVariable.h"
+#include "../Core/Config.h"
+#include "../Core/Mutex.h"
+#include "../Core/Time.h"
+#include "../Tree/Tree.h"
 
 #ifndef LOGCABIN_SERVER_STATEMACHINE_H
 #define LOGCABIN_SERVER_STATEMACHINE_H

@@ -19,12 +19,12 @@
 #include <memory>
 #include <thread>
 
-#include "build/Protocol/ServerStats.pb.h"
+#include "../build/Protocol/ServerStats.pb.h"
 
-#include "Core/Mutex.h"
-#include "Core/Time.h"
-#include "Event/Signal.h"
-#include "Event/Timer.h"
+#include "../Core/Mutex.h"
+#include "../Core/Time.h"
+#include "../Event/Signal.h"
+#include "../Event/Timer.h"
 
 namespace LogCabin {
 namespace Server {

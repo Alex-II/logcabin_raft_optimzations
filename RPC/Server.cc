@@ -13,10 +13,10 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "RPC/OpaqueServerRPC.h"
-#include "RPC/Server.h"
-#include "RPC/ServerRPC.h"
-#include "RPC/ThreadDispatchService.h"
+#include "../RPC/OpaqueServerRPC.h"
+#include "../RPC/Server.h"
+#include "../RPC/ServerRPC.h"
+#include "../RPC/ThreadDispatchService.h"
 
 namespace LogCabin {
 namespace RPC {

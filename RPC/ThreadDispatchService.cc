@@ -15,9 +15,9 @@
 
 #include <assert.h>
 
-#include "Core/StringUtil.h"
-#include "Core/ThreadId.h"
-#include "RPC/ThreadDispatchService.h"
+#include "../Core/StringUtil.h"
+#include "../Core/ThreadId.h"
+#include "../RPC/ThreadDispatchService.h"
 
 namespace LogCabin {
 namespace RPC {

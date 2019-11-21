@@ -15,8 +15,8 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/ProtoBuf.h"
-#include "RPC/ServiceMock.h"
+#include "../Core/ProtoBuf.h"
+#include "../RPC/ServiceMock.h"
 
 namespace LogCabin {
 namespace RPC {

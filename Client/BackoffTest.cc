@@ -15,7 +15,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Client/Backoff.h"
+#include "../Client/Backoff.h"
 
 namespace LogCabin {
 namespace Client {

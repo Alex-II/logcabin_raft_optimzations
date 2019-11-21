@@ -18,9 +18,9 @@
 #include <sys/epoll.h>
 #include <unistd.h>
 
-#include "Core/Debug.h"
-#include "Event/File.h"
-#include "Event/Loop.h"
+#include "../Core/Debug.h"
+#include "../Event/File.h"
+#include "../Event/Loop.h"
 
 namespace LogCabin {
 namespace Event {

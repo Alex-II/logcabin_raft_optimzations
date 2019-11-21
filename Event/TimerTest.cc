@@ -16,9 +16,9 @@
 #include <gtest/gtest.h>
 #include <sys/time.h>
 
-#include "Core/Util.h"
-#include "Event/Loop.h"
-#include "Event/Timer.h"
+#include "../Core/Util.h"
+#include "../Event/Loop.h"
+#include "../Event/Timer.h"
 
 namespace LogCabin {
 namespace Event {

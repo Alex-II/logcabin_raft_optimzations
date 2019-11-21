@@ -16,9 +16,9 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/Debug.h"
-#include "Client/LeaderRPCMock.h"
-#include "Core/ProtoBuf.h"
+#include "../Core/Debug.h"
+#include "../Client/LeaderRPCMock.h"
+#include "../Core/ProtoBuf.h"
 
 namespace LogCabin {
 namespace Client {

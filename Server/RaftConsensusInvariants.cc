@@ -13,9 +13,9 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Server/RaftConsensus.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Server/RaftConsensus.h"
 
 namespace LogCabin {
 namespace Server {

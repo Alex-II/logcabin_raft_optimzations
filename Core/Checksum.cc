@@ -29,11 +29,11 @@
 #include <cryptopp/tiger.h>
 #include <cryptopp/ripemd.h>
 
-#include "Core/Debug.h"
-#include "Core/Checksum.h"
-#include "Core/STLUtil.h"
-#include "Core/StringUtil.h"
-#include "Core/Util.h"
+#include "../Core/Debug.h"
+#include "../Core/Checksum.h"
+#include "../Core/STLUtil.h"
+#include "../Core/StringUtil.h"
+#include "../Core/Util.h"
 
 namespace LogCabin {
 namespace Core {

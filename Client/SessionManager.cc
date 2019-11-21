@@ -14,12 +14,12 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Client/SessionManager.h"
-#include "Core/ProtoBuf.h"
-#include "Protocol/Common.h"
-#include "RPC/ClientRPC.h"
-#include "RPC/ClientSession.h"
-#include "build/Protocol/Client.pb.h"
+#include "../Client/SessionManager.h"
+#include "../Core/ProtoBuf.h"
+#include "../Protocol/Common.h"
+#include "../RPC/ClientRPC.h"
+#include "../RPC/ClientSession.h"
+#include "../build/Protocol/Client.pb.h"
 
 namespace LogCabin {
 namespace Client {

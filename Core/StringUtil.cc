@@ -27,7 +27,7 @@
 #include <locale>
 #include <sstream>
 
-#include "Core/StringUtil.h"
+#include "../Core/StringUtil.h"
 
 namespace LogCabin {
 namespace Core {

@@ -16,8 +16,8 @@
 #include <gtest/gtest.h>
 #include <thread>
 
-#include "Core/ConditionVariable.h"
-#include "Core/Time.h"
+#include "../Core/ConditionVariable.h"
+#include "../Core/Time.h"
 
 namespace LogCabin {
 namespace Core {

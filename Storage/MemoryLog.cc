@@ -18,12 +18,12 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "build/Protocol/Raft.pb.h"
-#include "Core/Buffer.h"
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "Core/StringUtil.h"
-#include "Storage/MemoryLog.h"
+#include "../build/Protocol/Raft.pb.h"
+#include "../Core/Buffer.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/StringUtil.h"
+#include "../Storage/MemoryLog.h"
 
 namespace LogCabin {
 namespace Storage {

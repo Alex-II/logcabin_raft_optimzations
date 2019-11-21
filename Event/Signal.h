@@ -17,7 +17,7 @@
 #ifndef LOGCABIN_EVENT_SIGNAL_H
 #define LOGCABIN_EVENT_SIGNAL_H
 
-#include "Event/File.h"
+#include "../Event/File.h"
 
 namespace LogCabin {
 namespace Event {

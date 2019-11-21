@@ -16,12 +16,12 @@
 
 #include <memory>
 
-#include "Client/SessionManager.h"
-#include "Core/Config.h"
-#include "Core/Mutex.h"
-#include "Event/Loop.h"
-#include "Event/Signal.h"
-#include "Server/ServerStats.h"
+#include "../Client/SessionManager.h"
+#include "../Core/Config.h"
+#include "../Core/Mutex.h"
+#include "../Event/Loop.h"
+#include "../Event/Signal.h"
+#include "../Server/ServerStats.h"
 
 #ifndef LOGCABIN_SERVER_GLOBALS_H
 #define LOGCABIN_SERVER_GLOBALS_H

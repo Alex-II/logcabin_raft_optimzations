@@ -19,8 +19,8 @@
 #include <unistd.h>
 #include <thread>
 
-#include "Core/Random.h"
-#include "Core/ConditionVariable.h"
+#include "../Core/Random.h"
+#include "../Core/ConditionVariable.h"
 
 namespace LogCabin {
 namespace Core {

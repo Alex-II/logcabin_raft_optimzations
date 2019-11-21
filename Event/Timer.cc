@@ -19,9 +19,9 @@
 #include <sys/timerfd.h>
 #include <unistd.h>
 
-#include "Core/Debug.h"
-#include "Event/Loop.h"
-#include "Event/Timer.h"
+#include "../Core/Debug.h"
+#include "../Event/Loop.h"
+#include "../Event/Timer.h"
 
 namespace LogCabin {
 namespace Event {

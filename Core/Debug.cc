@@ -25,10 +25,10 @@
 #include <unistd.h>
 #include <unordered_map>
 
-#include "Core/Debug.h"
-#include "Core/StringUtil.h"
-#include "Core/ThreadId.h"
-#include "include/LogCabin/Debug.h"
+#include "../Core/Debug.h"
+#include "../Core/StringUtil.h"
+#include "../Core/ThreadId.h"
+#include "../include/LogCabin/Debug.h"
 
 namespace LogCabin {
 namespace Core {

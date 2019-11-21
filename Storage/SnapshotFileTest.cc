@@ -18,13 +18,13 @@
 #include <gtest/gtest.h>
 #include <sys/stat.h>
 
-#include "build/Core/ProtoBufTest.pb.h"
-#include "Core/Debug.h"
-#include "Core/StringUtil.h"
-#include "Core/STLUtil.h"
-#include "Storage/FilesystemUtil.h"
-#include "Storage/Layout.h"
-#include "Storage/SnapshotFile.h"
+#include "../build/Core/ProtoBufTest.pb.h"
+#include "../Core/Debug.h"
+#include "../Core/StringUtil.h"
+#include "../Core/STLUtil.h"
+#include "../Storage/FilesystemUtil.h"
+#include "../Storage/Layout.h"
+#include "../Storage/SnapshotFile.h"
 
 namespace LogCabin {
 namespace Storage {

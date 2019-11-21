@@ -16,16 +16,16 @@
 
 #include <signal.h>
 
-#include "Core/Debug.h"
-#include "Core/StringUtil.h"
-#include "Protocol/Common.h"
-#include "RPC/Server.h"
-#include "Server/ClientService.h"
-#include "Server/ControlService.h"
-#include "Server/Globals.h"
-#include "Server/RaftConsensus.h"
-#include "Server/RaftService.h"
-#include "Server/StateMachine.h"
+#include "../Core/Debug.h"
+#include "../Core/StringUtil.h"
+#include "../Protocol/Common.h"
+#include "../RPC/Server.h"
+#include "../Server/ClientService.h"
+#include "../Server/ControlService.h"
+#include "../Server/Globals.h"
+#include "../Server/RaftConsensus.h"
+#include "../Server/RaftService.h"
+#include "../Server/StateMachine.h"
 
 namespace LogCabin {
 namespace Server {

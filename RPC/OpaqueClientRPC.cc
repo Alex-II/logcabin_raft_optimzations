@@ -14,9 +14,9 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "Core/Mutex.h"
-#include "RPC/ClientSession.h"
-#include "RPC/OpaqueClientRPC.h"
+#include "../Core/Mutex.h"
+#include "../RPC/ClientSession.h"
+#include "../RPC/OpaqueClientRPC.h"
 
 namespace LogCabin {
 namespace RPC {

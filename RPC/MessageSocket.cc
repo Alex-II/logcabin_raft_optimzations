@@ -24,10 +24,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "Core/Debug.h"
-#include "Core/Endian.h"
-#include "Event/Loop.h"
-#include "RPC/MessageSocket.h"
+#include "../Core/Debug.h"
+#include "../Core/Endian.h"
+#include "../Event/Loop.h"
+#include "../RPC/MessageSocket.h"
 
 namespace LogCabin {
 namespace RPC {

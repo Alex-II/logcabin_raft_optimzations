@@ -15,7 +15,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/Buffer.h"
+#include "../Core/Buffer.h"
 
 namespace LogCabin {
 namespace Core {

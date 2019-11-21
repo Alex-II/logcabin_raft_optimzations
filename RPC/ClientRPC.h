@@ -20,7 +20,7 @@
 #include <memory>
 #include <string>
 
-#include "RPC/OpaqueClientRPC.h"
+#include "../RPC/OpaqueClientRPC.h"
 
 #ifndef LOGCABIN_RPC_CLIENTRPC_H
 #define LOGCABIN_RPC_CLIENTRPC_H

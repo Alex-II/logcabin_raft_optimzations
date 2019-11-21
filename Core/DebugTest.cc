@@ -18,11 +18,11 @@
 #include <sys/stat.h>
 #include <unordered_map>
 
-#include "Core/Debug.h"
-#include "Core/STLUtil.h"
-#include "Core/Util.h"
-#include "Storage/FilesystemUtil.h"
-#include "include/LogCabin/Debug.h"
+#include "../Core/Debug.h"
+#include "../Core/STLUtil.h"
+#include "../Core/Util.h"
+#include "../Storage/FilesystemUtil.h"
+#include "../include/LogCabin/Debug.h"
 
 namespace LogCabin {
 namespace Core {

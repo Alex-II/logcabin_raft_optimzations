@@ -19,11 +19,11 @@
 #include <memory>
 #include <mutex>
 
-#include "build/Protocol/Client.pb.h"
-#include "Client/SessionManager.h"
-#include "Core/ConditionVariable.h"
-#include "RPC/Address.h"
-#include "RPC/ClientRPC.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../Client/SessionManager.h"
+#include "../Core/ConditionVariable.h"
+#include "../RPC/Address.h"
+#include "../RPC/ClientRPC.h"
 
 #ifndef LOGCABIN_CLIENT_LEADERRPC_H
 #define LOGCABIN_CLIENT_LEADERRPC_H

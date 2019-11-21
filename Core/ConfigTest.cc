@@ -19,9 +19,9 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/Debug.h"
-#include "Core/Config.h"
-#include "Storage/FilesystemUtil.h"
+#include "../Core/Debug.h"
+#include "../Core/Config.h"
+#include "../Storage/FilesystemUtil.h"
 
 namespace LogCabin {
 namespace Core {

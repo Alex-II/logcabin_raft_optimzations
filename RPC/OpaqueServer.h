@@ -19,8 +19,8 @@
 #include <string>
 #include <unordered_set>
 
-#include "Core/CompatHash.h"
-#include "RPC/MessageSocket.h"
+#include "../Core/CompatHash.h"
+#include "../RPC/MessageSocket.h"
 
 #ifndef LOGCABIN_RPC_OPAQUESERVER_H
 #define LOGCABIN_RPC_OPAQUESERVER_H

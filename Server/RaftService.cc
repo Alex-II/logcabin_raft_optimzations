@@ -13,13 +13,13 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "build/Protocol/Raft.pb.h"
-#include "Core/Debug.h"
-#include "Core/ProtoBuf.h"
-#include "RPC/ServerRPC.h"
-#include "Server/RaftConsensus.h"
-#include "Server/RaftService.h"
-#include "Server/Globals.h"
+#include "../build/Protocol/Raft.pb.h"
+#include "../Core/Debug.h"
+#include "../Core/ProtoBuf.h"
+#include "../RPC/ServerRPC.h"
+#include "../Server/RaftConsensus.h"
+#include "../Server/RaftService.h"
+#include "../Server/Globals.h"
 
 namespace LogCabin {
 namespace Server {

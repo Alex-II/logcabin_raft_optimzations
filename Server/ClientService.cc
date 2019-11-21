@@ -16,15 +16,15 @@
 
 #include <string.h>
 
-#include "build/Protocol/Client.pb.h"
-#include "Core/Buffer.h"
-#include "Core/ProtoBuf.h"
-#include "Core/Time.h"
-#include "RPC/ServerRPC.h"
-#include "Server/RaftConsensus.h"
-#include "Server/ClientService.h"
-#include "Server/Globals.h"
-#include "Server/StateMachine.h"
+#include "../build/Protocol/Client.pb.h"
+#include "../Core/Buffer.h"
+#include "../Core/ProtoBuf.h"
+#include "../Core/Time.h"
+#include "../RPC/ServerRPC.h"
+#include "../Server/RaftConsensus.h"
+#include "../Server/ClientService.h"
+#include "../Server/Globals.h"
+#include "../Server/StateMachine.h"
 
 namespace LogCabin {
 namespace Server {
