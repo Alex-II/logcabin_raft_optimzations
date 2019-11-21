@@ -274,6 +274,7 @@ class PidFile {
 int
 main(int argc, char** argv)
 {
+    // test comment
     using namespace LogCabin;
 
     try {
