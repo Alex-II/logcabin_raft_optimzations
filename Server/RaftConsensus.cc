@@ -1264,7 +1264,7 @@ RaftConsensus::handleAppendEntries(
                     const Protocol::Raft::AppendEntries::Request& request,
                     Protocol::Raft::AppendEntries::Response& response)
 {
-    std::lock_guard<Mutex> lockGuard(mutex);
+    std::lock_guard<Mutex> lockGuard(mutex); // FOLLOWER: append entries from leader RPC call
     assert(!exiting);
 
     // Set response to a rejection. We'll overwrite these later if we end up
@@ -1584,7 +1584,7 @@ RaftConsensus::handleRequestVote(
 std::pair<RaftConsensus::ClientResult, uint64_t>
 RaftConsensus::replicate(const Core::Buffer& operation)
 {
-    std::unique_lock<Mutex> lockGuard(mutex);
+    std::unique_lock<Mutex> lockGuard(mutex); // LEADER: this seems to impose sequential processing
     Log::Entry entry;
     entry.set_type(Protocol::Raft::EntryType::DATA);
     entry.set_data(operation.getData(), operation.getLength());
@@ -2082,7 +2082,8 @@ RaftConsensus::peerThreadMain(std::shared_ptr<Peer> peer)
         if (peer->backoffUntil > now) {
             waitUntil = peer->backoffUntil;
         } else {
-            switch (state) {
+            switch (state) { // LEADER: main inter-member loop for RPC calls
+                            // FOLLOWER: main inter-member loop , no RPCs for them followers
                 // Followers don't issue RPCs.
                 case State::FOLLOWER:
                     waitUntil = TimePoint::max();
@@ -2096,7 +2097,7 @@ RaftConsensus::peerThreadMain(std::shared_ptr<Peer> peer)
                         waitUntil = TimePoint::max();
                     break;
 
-                // Leaders replicate entries and periodically send heartbeats.
+                // Leaders replicate entries and periodically send heartbeats. // LEADER: main thread to append entries per peer
                 case State::LEADER:
                     if (peer->getMatchIndex() < log->getLastLogIndex() ||
                         peer->nextHeartbeatTime < now) {
@@ -2182,7 +2183,7 @@ RaftConsensus::advanceCommitIndex()
 
     // calculate the largest entry ID stored on a quorum of servers
     uint64_t newCommitIndex =
-        configuration->quorumMin(&Server::getMatchIndex);
+        configuration->quorumMin(&Server::getMatchIndex); // LEADER: trying to advance commit index; ?find every server's highest commit index?
     if (commitIndex >= newCommitIndex)
         return;
     // If we have discarded the entry, it's because we already knew it was
@@ -2289,7 +2290,7 @@ RaftConsensus::appendEntries(std::unique_lock<Mutex>& lockGuard,
     TimePoint start = Clock::now();
     uint64_t epoch = currentEpoch;
     Peer::CallStatus status = peer.callRPC(
-                Protocol::Raft::OpCode::APPEND_ENTRIES,
+                Protocol::Raft::OpCode::APPEND_ENTRIES, // LEADER: append entries to follower (peer) (also change commit)
                 request, response,
                 lockGuard);
     switch (status) {
@@ -2321,7 +2322,7 @@ RaftConsensus::appendEntries(std::unique_lock<Mutex>& lockGuard,
     } else {
         assert(response.term() == currentTerm);
         peer.lastAckEpoch = epoch;
-        stateChanged.notify_all();
+        stateChanged.notify_all(); // LEADER: ?tell a waiting thread something; which tread? who knows
         peer.nextHeartbeatTime = start + HEARTBEAT_PERIOD;
         if (response.success()) {
             if (peer.matchIndex > prevLogIndex + numEntries) {
@@ -2332,7 +2333,7 @@ RaftConsensus::appendEntries(std::unique_lock<Mutex>& lockGuard,
                         "didn't.");
             } else {
                 peer.matchIndex = prevLogIndex + numEntries;
-                advanceCommitIndex();
+                advanceCommitIndex(); // LEADER: how can we advance? don't we need majority?
             }
             peer.nextIndex = peer.matchIndex + 1;
             peer.suppressBulkData = false;
@@ -2745,15 +2746,16 @@ RaftConsensus::replicateEntry(Log::Entry& entry,
     if (state == State::LEADER) {
         entry.set_term(currentTerm);
         entry.set_cluster_time(clusterClock.leaderStamp());
-        append({&entry});
+        append({&entry}); // LEADER: appends to its local log
         uint64_t index = log->getLastLogIndex();
         while (!exiting && currentTerm == entry.term()) {
-            if (commitIndex >= index) {
+            if (commitIndex >= index) { // LEADER: something else is changing the commitIndex (as it receives confirmation from the followers)
                 VERBOSE("replicate succeeded");
                 return {ClientResult::SUCCESS, index};
             }
-            stateChanged.wait(lockGuard);
+            stateChanged.wait(lockGuard); // LEADER: waits for ?a broadcast from?
         }
+
     }
     return {ClientResult::NOT_LEADER, 0};
 }

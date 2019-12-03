@@ -43,6 +43,8 @@ ClientService::~ClientService()
 void
 ClientService::handleRPC(RPC::ServerRPC rpc)
 {
+
+
     using Protocol::Client::OpCode;
 
     // Call the appropriate RPC handler based on the request's opCode.
@@ -51,6 +53,7 @@ ClientService::handleRPC(RPC::ServerRPC rpc)
             getServerInfo(std::move(rpc));
             break;
         case OpCode::VERIFY_RECIPIENT:
+            std::cout << "ClientService::handleRPC  VERIFY_RECIPIENT" << std::endl;
             verifyRecipient(std::move(rpc));
             break;
         case OpCode::GET_CONFIGURATION:
@@ -60,6 +63,7 @@ ClientService::handleRPC(RPC::ServerRPC rpc)
             setConfiguration(std::move(rpc));
             break;
         case OpCode::STATE_MACHINE_COMMAND:
+            std::cout << "ClientService::handleRPC  STATE_MACHINE_COMMAND" << std::endl;
             stateMachineCommand(std::move(rpc));
             break;
         case OpCode::STATE_MACHINE_QUERY:
@@ -154,6 +158,13 @@ ClientService::stateMachineCommand(RPC::ServerRPC rpc)
     PRELUDE(StateMachineCommand);
     Core::Buffer cmdBuffer;
     rpc.getRequest(cmdBuffer);
+
+    std::cout << std::endl << std::endl << "stateMachineCommand called with data len " << cmdBuffer.getLength() << std::endl;
+    std::cout << Core::ProtoBuf::dumpString(request) << std::endl;
+    if (cmdBuffer.getLength() > 0){
+        std::cout << "stateMachineCommand called with data " << (char*)cmdBuffer.getData() << std::endl << std::endl << std::endl;
+    }
+
     std::pair<Result, uint64_t> result = globals.raft->replicate(cmdBuffer);
     if (result.first == Result::RETRY || result.first == Result::NOT_LEADER) {
         Protocol::Client::Error error;

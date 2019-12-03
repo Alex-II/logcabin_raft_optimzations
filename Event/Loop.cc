@@ -123,7 +123,7 @@ Loop::~Loop()
 void
 Loop::runForever()
 {
-    while (true) {
+    while (true) { // LEADER: epoll thread
         { // Handle Loop::Lock requests and exiting.
             std::unique_lock<std::mutex> lockGuard(mutex);
             runningThread = Core::ThreadId::NONE;

@@ -15,6 +15,8 @@
  */
 
 #include <algorithm>
+#include <zconf.h>
+#include <fstream>
 
 #include "../Core/Debug.h"
 #include "../Client/ClientImpl.h"
@@ -123,37 +125,66 @@ treeCall(LeaderRPCBase& leaderRPC,
          Protocol::Client::ReadOnlyTree::Response& response,
          ClientImpl::TimePoint timeout)
 {
-    VERBOSE("Calling read-only tree query with request:\n%s",
-            Core::StringUtil::trim(
-                Core::ProtoBuf::dumpString(request)).c_str());
-    LeaderRPC::Status status;
-    Protocol::Client::StateMachineQuery::Request qrequest;
-    Protocol::Client::StateMachineQuery::Response qresponse;
-    *qrequest.mutable_tree() = request;
-    status = leaderRPC.call(Protocol::Client::OpCode::STATE_MACHINE_QUERY,
-                            qrequest, qresponse, timeout);
-    switch (status) {
-        case LeaderRPC::Status::OK:
-            response = *qresponse.mutable_tree();
-            VERBOSE("Reply to read-only tree query:\n%s",
-                    Core::StringUtil::trim(
-                        Core::ProtoBuf::dumpString(response)).c_str());
-            break;
-        case LeaderRPC::Status::TIMEOUT:
-            response.set_status(Protocol::Client::Status::TIMEOUT);
-            response.set_error("Client-specified timeout elapsed");
-            VERBOSE("Timeout elapsed on read-only tree query");
-            break;
-        case LeaderRPC::Status::INVALID_REQUEST:
-            // TODO(ongaro): Once any new Tree request types are introduced,
-            // this PANIC will need to move up the call stack, so that we can
-            // try a new-style request and then ask for forgiveness if it
-            // fails. Same for the read-write tree calls below.
-            PANIC("The server and/or replicated state machine doesn't support "
-                  "the read-only tree query or claims the request is "
-                  "malformed. Request is: %s",
-                  Core::ProtoBuf::dumpString(request).c_str());
+    bool keep_reading = true;
+
+    const char* env_show_contents = std::getenv("SHOW_CONTENTS");
+
+    const char* env_us_pause = std::getenv("MICROSECONDS_PAUSE");
+    if(!env_us_pause){
+        std::cout << "Need env var  MICROSECONDS_PAUSE" << std::endl;
+        PANIC("");
     }
+    int uspause = std::stoi(env_us_pause);
+    std::cout << "Will pause for " << uspause << " between reads" << std::endl;
+
+    while(keep_reading) {
+
+        VERBOSE("Calling read-only tree query with request:\n%s",
+                Core::StringUtil::trim(
+                    Core::ProtoBuf::dumpString(request)).c_str());
+        LeaderRPC::Status status;
+        Protocol::Client::StateMachineQuery::Request qrequest;
+        Protocol::Client::StateMachineQuery::Response qresponse;
+        *qrequest.mutable_tree() = request;
+
+        usleep(uspause);
+
+
+        status = leaderRPC.call(Protocol::Client::OpCode::STATE_MACHINE_QUERY,
+                                qrequest, qresponse, timeout);
+        switch (status) {
+            case LeaderRPC::Status::OK:
+                if(env_show_contents){
+                    std::cout << "OK READ: " << Core::StringUtil::trim(
+                            Core::ProtoBuf::dumpString(response)).c_str() << std::endl;
+                } else {
+                    std::cout << "OK READ" << std::endl;
+                }
+
+                response = *qresponse.mutable_tree();
+
+                VERBOSE("Reply to read-only tree query:\n%s",
+                        Core::StringUtil::trim(
+                                Core::ProtoBuf::dumpString(response)).c_str());
+                break;
+            case LeaderRPC::Status::TIMEOUT:
+                std::cout << "TIMEOUT READ" << std::endl;
+                response.set_status(Protocol::Client::Status::TIMEOUT);
+                response.set_error("Client-specified timeout elapsed");
+                VERBOSE("Timeout elapsed on read-only tree query");
+                break;
+            case LeaderRPC::Status::INVALID_REQUEST:
+                // TODO(ongaro): Once any new Tree request types are introduced,
+                // this PANIC will need to move up the call stack, so that we can
+                // try a new-style request and then ask for forgiveness if it
+                // fails. Same for the read-write tree calls below.
+                PANIC("The server and/or replicated state machine doesn't support "
+                      "the read-only tree query or claims the request is "
+                      "malformed. Request is: %s",
+                      Core::ProtoBuf::dumpString(request).c_str());
+        }
+    }
+
 }
 
 /**
@@ -167,39 +198,63 @@ treeCall(LeaderRPCBase& leaderRPC,
          Protocol::Client::ReadWriteTree::Response& response,
          ClientImpl::TimePoint timeout)
 {
-    VERBOSE("Calling read-write tree command with request:\n%s",
-            Core::StringUtil::trim(
-                Core::ProtoBuf::dumpString(request)).c_str());
-    Protocol::Client::StateMachineCommand::Request crequest;
-    Protocol::Client::StateMachineCommand::Response cresponse;
-    *crequest.mutable_tree() = request;
-    LeaderRPC::Status status;
-    if (request.exactly_once().client_id() == 0) {
-        VERBOSE("Already timed out on establishing session for read-write "
-                "tree command");
-        status = LeaderRPC::Status::TIMEOUT;
-    } else {
-        status = leaderRPC.call(Protocol::Client::OpCode::STATE_MACHINE_COMMAND,
-                                crequest, cresponse, timeout);
-    }
+    bool keep_writing = true;
 
-    switch (status) {
-        case LeaderRPC::Status::OK:
-            response = *cresponse.mutable_tree();
-            VERBOSE("Reply to read-write tree command:\n%s",
-                    Core::StringUtil::trim(
-                        Core::ProtoBuf::dumpString(response)).c_str());
-            break;
-        case LeaderRPC::Status::TIMEOUT:
-            response.set_status(Protocol::Client::Status::TIMEOUT);
-            response.set_error("Client-specified timeout elapsed");
-            VERBOSE("Timeout elapsed on read-write tree command");
-            break;
-        case LeaderRPC::Status::INVALID_REQUEST:
-            PANIC("The server and/or replicated state machine doesn't support "
-                  "the read-write tree command or claims the request is "
-                  "malformed. Request is: %s",
-                  Core::ProtoBuf::dumpString(request).c_str());
+    // wait between writes
+    const char* env_us_pause = std::getenv("MICROSECONDS_PAUSE");
+    if(!env_us_pause){
+        std::cout << "Need env MICROSECONDS_PAUSE" << std::endl;
+        PANIC("need env MICROSECONDS_PAUSE");
+    }
+    int uspause = std::stoi(env_us_pause);
+    std::cout << "Will pause for " << uspause << " between writes" << std::endl;
+
+    while(keep_writing) {
+
+        usleep(uspause);
+
+        VERBOSE("Calling read-write tree command with request:\n%s",
+                Core::StringUtil::trim(
+                        Core::ProtoBuf::dumpString(request)).c_str());
+        Protocol::Client::StateMachineCommand::Request crequest;
+        Protocol::Client::StateMachineCommand::Response cresponse;
+
+        *crequest.mutable_tree() = request;
+        LeaderRPC::Status status;
+        if (request.exactly_once().client_id() == 0) {
+            VERBOSE("Already timed out on establishing session for read-write "
+                    "tree command");
+            status = LeaderRPC::Status::TIMEOUT;
+        } else {
+
+
+            std::cout << "TreeOps about to call leader with: " << Core::StringUtil::trim(
+                    Core::ProtoBuf::dumpString(request)).c_str() << std::endl;
+            status = leaderRPC.call(Protocol::Client::OpCode::STATE_MACHINE_COMMAND,
+                                    crequest, cresponse, timeout);
+        }
+
+        switch (status) {
+            case LeaderRPC::Status::OK:
+
+                std::cout << "OK WROTE" << std::endl;
+
+                response = *cresponse.mutable_tree();
+                VERBOSE("Reply to read-write tree command:\n%s",
+                        Core::StringUtil::trim(
+                                Core::ProtoBuf::dumpString(response)).c_str());
+                break;
+            case LeaderRPC::Status::TIMEOUT:
+                response.set_status(Protocol::Client::Status::TIMEOUT);
+                response.set_error("Client-specified timeout elapsed");
+                VERBOSE("Timeout elapsed on read-write tree command");
+                break;
+            case LeaderRPC::Status::INVALID_REQUEST:
+                PANIC("The server and/or replicated state machine doesn't support "
+                      "the read-write tree command or claims the request is "
+                      "malformed. Request is: %s",
+                      Core::ProtoBuf::dumpString(request).c_str());
+        }
     }
 }
 

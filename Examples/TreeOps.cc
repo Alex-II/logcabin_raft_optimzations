@@ -303,6 +303,7 @@ dumpTree(const Tree& tree, std::string path)
 std::string
 readStdin()
 {
+
     std::cin >> std::noskipws;
     std::istream_iterator<char> it(std::cin);
     std::istream_iterator<char> end;
@@ -338,6 +339,42 @@ main(int argc, char** argv)
                                 options.condition.second);
         }
 
+        // what are we writing
+        char *file_contents;
+        if(options.command== Command::WRITE){
+            const char* env_contents_filepath = std::getenv("FILE_WRITE");
+            if(!env_contents_filepath) {
+                std::cout << "Need env var  FILE_WRITE for a file in which to find content to write to logcabin" << std::endl;
+                exit(-200);
+            }
+            FILE *fp;
+            fp=fopen(env_contents_filepath, "r");
+            if(fp == NULL){
+                printf("Couldn't open %s\n", env_contents_filepath);
+                perror("couldn't open file");
+                exit(-200);
+            }
+            // file size, seek to beginning
+            fseek(fp, 0L, SEEK_END);
+            long int file_size = ftell(fp);
+            rewind(fp);
+
+            file_contents = (char *)malloc(file_size);
+            if(file_contents == NULL){
+                perror("malloc did a bad thing");
+                exit(-200);
+            }
+
+            fread(file_contents, file_size, 1, fp);
+
+            fclose(fp);
+            float filesize_kilobytes = float(file_size)/float(1024);
+            float filesize_megabytes = filesize_kilobytes/float(1024);
+            printf("\nwill write %ld bytes, %f kilobytes, %f megabytes \n",file_size, filesize_kilobytes, filesize_megabytes);
+            //
+        }
+
+
         std::string& path = options.path;
         switch (options.command) {
             case Command::MKDIR:
@@ -359,7 +396,9 @@ main(int argc, char** argv)
                 tree.removeDirectoryEx(path);
                 break;
             case Command::WRITE:
-                tree.writeEx(path, readStdin());
+
+                tree.writeEx(path, std::string(file_contents));
+                // tree.writeEx(path, readStdin());
                 break;
             case Command::READ: {
                 std::string contents = tree.readEx(path);
