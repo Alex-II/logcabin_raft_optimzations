@@ -78,13 +78,6 @@ OpaqueServer::MessageSocketHandler::handleReceivedMessage(
             VERBOSE("Handling RPC");
             OpaqueServerRPC rpc(self, messageId, std::move(message));
 
-            if (message.getLength() > 0) {
-                std::cout << "ABOUT TO CALL CHILD HANDLE RPC line 80; data len" << message.getLength() << ", data: " << (char*)message.getData() << std::endl << std::endl;
-            }
-            else {
-                std::cout << "ABOUT TO CALL CHILD HANDLE RPC line 80; data len" << message.getLength() << std::endl << std::endl;
-            }
-
             server->rpcHandler.handleRPC(std::move(rpc));
         }
     }

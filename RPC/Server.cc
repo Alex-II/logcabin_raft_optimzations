@@ -49,13 +49,8 @@ Server::RPCHandler::handleRPC(OpaqueServerRPC opaqueRPC)
         if (it != server.services.end())
             service = it->second;
     }
-    if (service){
-        std::cout << "ABOUT TO CALL HANDLE RPC line 52" << std::endl << std::endl;
+    if (service)
         service->handleRPC(std::move(rpc));
-
-    }
-
-
     else
         rpc.rejectInvalidService();
 }
