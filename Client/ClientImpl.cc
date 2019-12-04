@@ -183,6 +183,7 @@ treeCall(LeaderRPCBase& leaderRPC,
                       "malformed. Request is: %s",
                       Core::ProtoBuf::dumpString(request).c_str());
         }
+        break;
     }
 
 }
@@ -255,6 +256,7 @@ treeCall(LeaderRPCBase& leaderRPC,
                       "malformed. Request is: %s",
                       Core::ProtoBuf::dumpString(request).c_str());
         }
+        break;
     }
 }
 

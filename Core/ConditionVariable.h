@@ -90,6 +90,25 @@ class ConditionVariable {
         wait_until(lockGuard, steadyWake);
     }
 
+
+    template<typename Clock, typename Duration>
+    void
+    wait_until(std::chrono::time_point<Clock, Duration>& abs_time) {
+        std::chrono::time_point<Clock, Duration> now = Clock::now();
+        std::chrono::time_point<Clock, Duration> wake = abs_time;
+        // Clamp to wake to [now - hour, now + hour] to avoid overflow.
+        // See related http://gcc.gnu.org/bugzilla/show_bug.cgi?id=58931
+        if (abs_time < now)
+            wake = now - std::chrono::hours(1);
+        else if (abs_time > now + std::chrono::hours(1))
+            wake = now + std::chrono::hours(1);
+        Core::Time::SteadyClock::time_point steadyNow =
+                Core::Time::SteadyClock::now();
+        Core::Time::SteadyClock::time_point steadyWake =
+                steadyNow + (wake - now);
+        wait_until(steadyWake);
+    }
+
     // Core::Mutex and any clock: calls std::mutex and any clock variant
     template<typename Clock, typename Duration>
     void
@@ -98,7 +117,7 @@ class ConditionVariable {
         Core::Mutex& mutex(*lockGuard.mutex());
         if (mutex.callback)
             mutex.callback();
-        assert(lockGuard);
+        //assert(lockGuard);
         std::unique_lock<std::mutex> stdLockGuard(mutex.m,
                                                   std::adopt_lock_t());
         lockGuard.release();

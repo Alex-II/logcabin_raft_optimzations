@@ -2068,7 +2068,10 @@ RaftConsensus::timerThreadMain()
 void
 RaftConsensus::peerThreadMain(std::shared_ptr<Peer> peer)
 {
+
+
     std::unique_lock<Mutex> lockGuard(mutex);
+    lockGuard.unlock();
     Core::ThreadId::setName(
         Core::StringUtil::format("Peer(%lu)", peer->serverId));
     NOTICE("Peer thread for server %lu started", peer->serverId);
@@ -2076,6 +2079,9 @@ RaftConsensus::peerThreadMain(std::shared_ptr<Peer> peer)
     // Each iteration of this loop issues a new RPC or sleeps on the condition
     // variable.
     while (!peer->exiting) {
+        auto start= std::chrono::system_clock::now();
+        bool didwork = false;
+        // std::cout << "start [" << peer->serverId << "][" << state  << "]:" <<  << std::endl;
         TimePoint now = Clock::now();
         TimePoint waitUntil = TimePoint::min();
 
@@ -2101,6 +2107,7 @@ RaftConsensus::peerThreadMain(std::shared_ptr<Peer> peer)
                 case State::LEADER:
                     if (peer->getMatchIndex() < log->getLastLogIndex() ||
                         peer->nextHeartbeatTime < now) {
+                        didwork = true;
                         // appendEntries delegates to installSnapshot if we
                         // need to send a snapshot instead
                         appendEntries(lockGuard, *peer);
@@ -2112,6 +2119,13 @@ RaftConsensus::peerThreadMain(std::shared_ptr<Peer> peer)
         }
 
         stateChanged.wait_until(lockGuard, waitUntil);
+        //stateChanged.wait_until(waitUntil);
+        if(didwork){
+            auto end = std::chrono::system_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>( end - start ).count();
+
+            std::cout << "end [" << peer->serverId << state <<  "]:" << duration << std::endl;
+        }
     }
 
     // must return immediately after this
@@ -2304,7 +2318,6 @@ RaftConsensus::appendEntries(std::unique_lock<Mutex>& lockGuard,
             PANIC("The server's RaftService doesn't support the AppendEntries "
                   "RPC or claims the request is malformed");
     }
-
     // Process response
 
     if (currentTerm != request.term() || peer.exiting) {
