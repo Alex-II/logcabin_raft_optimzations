@@ -10,3 +10,5 @@
 /smoketest*.conf
 /smoketeststorage
 /storage
+/cmake-build-debug
+/.idea

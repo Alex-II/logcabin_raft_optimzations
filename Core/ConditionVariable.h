@@ -98,7 +98,7 @@ class ConditionVariable {
         Core::Mutex& mutex(*lockGuard.mutex());
         if (mutex.callback)
             mutex.callback();
-        assert(lockGuard);
+//        assert(lockGuard);
         std::unique_lock<std::mutex> stdLockGuard(mutex.m,
                                                   std::adopt_lock_t());
         lockGuard.release();
