@@ -199,20 +199,10 @@ treeCall(LeaderRPCBase& leaderRPC,
          Protocol::Client::ReadWriteTree::Response& response,
          ClientImpl::TimePoint timeout)
 {
-    bool keep_writing = true;
 
-    // wait between writes
-    const char* env_us_pause = std::getenv("MICROSECONDS_PAUSE");
-    if(!env_us_pause){
-        std::cout << "Need env MICROSECONDS_PAUSE" << std::endl;
-        PANIC("need env MICROSECONDS_PAUSE");
-    }
-    int uspause = std::stoi(env_us_pause);
-    std::cout << "Will pause for " << uspause << " between writes" << std::endl;
 
-    while(keep_writing) {
 
-        usleep(uspause);
+        // usleep(uspause);
 
         VERBOSE("Calling read-write tree command with request:\n%s",
                 Core::StringUtil::trim(
@@ -255,8 +245,7 @@ treeCall(LeaderRPCBase& leaderRPC,
                       "the read-write tree command or claims the request is "
                       "malformed. Request is: %s",
                       Core::ProtoBuf::dumpString(request).c_str());
-        }
-        break;
+
     }
 }
 
@@ -821,22 +810,37 @@ ClientImpl::write(const std::string& path,
                   const Condition& condition,
                   TimePoint timeout)
 {
-    std::string realPath;
-    Result result = canonicalize(path, workingDirectory, realPath);
-    if (result.status != Status::OK)
-        return result;
-    Protocol::Client::ReadWriteTree::Request request;
-    *request.mutable_exactly_once() =
-        exactlyOnceRPCHelper.getRPCInfo(timeout);
-    setCondition(request, condition);
-    request.mutable_write()->set_path(realPath);
-    request.mutable_write()->set_contents(contents);
-    Protocol::Client::ReadWriteTree::Response response;
-    treeCall(*leaderRPC,
-             request, response, timeout);
-    exactlyOnceRPCHelper.doneWithRPC(request.exactly_once());
-    if (response.status() != Protocol::Client::Status::OK)
-        return treeError(response);
+
+//    bool keep_writing = true;
+
+    // wait between writes
+//    const char* env_us_pause = std::getenv("MICROSECONDS_PAUSE");
+//    if(!env_us_pause){
+//        std::cout << "Need env MICROSECONDS_PAUSE" << std::endl;
+//        PANIC("need env MICROSECONDS_PAUSE");
+//    }
+//    int uspause = std::stoi(env_us_pause);
+    //std::cout << "Will pause for " << uspause << " between writes" << std::endl;
+
+    while(true){
+        std::string realPath;
+        Result result = canonicalize(path, workingDirectory, realPath);
+        if (result.status != Status::OK)
+            return result;
+        Protocol::Client::ReadWriteTree::Request request;
+        *request.mutable_exactly_once() =
+                exactlyOnceRPCHelper.getRPCInfo(timeout);
+        setCondition(request, condition);
+        request.mutable_write()->set_path(realPath);
+        request.mutable_write()->set_contents(contents);
+        Protocol::Client::ReadWriteTree::Response response;
+        treeCall(*leaderRPC,
+                 request, response, timeout);
+        exactlyOnceRPCHelper.doneWithRPC(request.exactly_once());
+    }
+
+//    if (response.status() != Protocol::Client::Status::OK)
+//        return treeError(response);
     return Result();
 }
 

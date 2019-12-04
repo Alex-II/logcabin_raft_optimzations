@@ -62,6 +62,7 @@ ClientService::handleRPC(RPC::ServerRPC rpc)
             setConfiguration(std::move(rpc));
             break;
         case OpCode::STATE_MACHINE_COMMAND:
+            globals.serverStats.dumpToDebugLog();
             stateMachineCommand(std::move(rpc));
             break;
         case OpCode::STATE_MACHINE_QUERY:
