@@ -38,9 +38,10 @@ namespace Server {
 // forward declarations
 class ClientService;
 class ControlService;
+class StateMachine;
 class RaftConsensus;
 class RaftService;
-class StateMachine;
+
 
 /**
  * Holds the LogCabin daemon's top-level objects.

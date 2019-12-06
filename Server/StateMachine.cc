@@ -302,8 +302,9 @@ StateMachine::apply(const RaftConsensus::Entry& entry)
 {
     Command::Request command;
     if (!Core::ProtoBuf::parse(entry.command, command)) {
-        PANIC("Failed to parse protobuf for entry %lu",
-              entry.index);
+        return;
+//        PANIC("Failed to parse protobuf for entry %lu",
+//              entry.index);
     }
     uint16_t runningVersion = getVersion(entry.index - 1);
     if (command.has_tree()) {

@@ -1590,6 +1590,92 @@ RaftConsensus::replicate(const Core::Buffer& operation)
     entry.set_data(operation.getData(), operation.getLength());
     return replicateEntry(entry, lockGuard);
 }
+//
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wmissing-noreturn"
+//std::pair<RaftConsensus::ClientResult, uint64_t>
+//RaftConsensus::special_replicate() {
+////    std::vector<Luggage*> operations_to_process;
+////    while (true) {
+////        operations_to_process.clear();
+////        std::unique_lock<Mutex> lockGuard(mutex); // LEADER: this seems to impose sequential processing
+////
+////        oplock.lock();
+////        for (int i = 0; operations.size(); i++) {
+////            operations_to_process.push_back(operations.at(i));
+////        }
+////        operations.clear();
+////        oplock.unlock();
+////
+////        for (int i = 0; operations.size(); i++) {
+////            operations_to_process.at(i)->entry.set_type(Protocol::Raft::EntryType::DATA);
+////            operations_to_process.at(i)->entry.set_data(operations_to_process.at(i)->operation->getData()
+////                    , operations_to_process.at(i)->operation->getLength());
+////        }
+////
+////        auto result = special_replicateEntry(operations_to_process, lockGuard);
+////        if (result.first == LogCabin::Server::RaftConsensus::ClientResult::RETRY || result.first == LogCabin::Server::RaftConsensus::ClientResult::NOT_LEADER) {
+////            Protocol::Client::Error error;
+////            error.set_error_code(Protocol::Client::Error::NOT_LEADER);
+////            std::string leaderHint = globals.raft->getLeaderHint();
+////            if (!leaderHint.empty())
+////                error.set_leader_hint(leaderHint);
+////            for(int i = 0; i < operations_to_process.size(); i++){
+////                operations_to_process.at(i)->rpc->returnError(error);
+////            }
+////        } else {
+////            for(int i = 0; i < operations_to_process.size(); i++){
+////                uint64_t logIndex = result.second;
+////                if (!globals.stateMachine->waitForResponse(logIndex, operations_to_process.at(i)->request,
+////                        operations_to_process.at(i)->response)) {
+////                    operations_to_process.at(i)->rpc->rejectInvalidRequest();
+////                } else {
+////                    operations_to_process.at(i)->rpc->reply(operations_to_process.at(i)->response);
+////                }
+////            }
+////        }
+//////
+//////
+//////
+//////        entry.set_type(Protocol::Raft::EntryType::DATA);
+//////        entry.set_data(operation.getData(), operation.getLength());
+//////        return replicateEntry(entry, lockGuard);
+//////    }
+//////
+//////    if (result.first == Result::RETRY || result.first == Result::NOT_LEADER) {
+//////        Protocol::Client::Error error;
+//////        error.set_error_code(Protocol::Client::Error::NOT_LEADER);
+//////        std::string leaderHint = globals.raft->getLeaderHint();
+//////        if (!leaderHint.empty())
+//////            error.set_leader_hint(leaderHint);
+//////        rpc.returnError(error);
+//////        return;
+//////    }
+//////    assert(result.first == Result::SUCCESS);
+//////    uint64_t logIndex = result.second;
+//////    if (!globals.stateMachine->waitForResponse(logIndex, request, response)) {
+//////        rpc.rejectInvalidRequest();
+//////        return;
+//////    }
+//////    rpc.reply(response);
+////    }
+//}
+//#pragma clang diagnostic pop
+//
+//std::pair<RaftConsensus::ClientResult, uint64_t>
+//RaftConsensus::special_prereplicate(Core::Buffer& operation, LogCabin::RPC::ServerRPC * rpc,
+//                                 Protocol::Client::StateMachineCommand::Request request,
+//                                 Protocol::Client::StateMachineCommand::Response response)
+//{
+////    oplock.lock();
+////    if (!special_thread_strated){
+////        std::thread(&RaftConsensus::special_replicate, this).detach();
+////        special_thread_strated = true;
+////    }
+////    Luggage * lug = new Luggage(&operation, rpc, request, response);
+////    operations.push_back(lug);
+////    oplock.unlock();
+//}
 
 RaftConsensus::ClientResult
 RaftConsensus::setConfiguration(
@@ -2124,7 +2210,7 @@ RaftConsensus::peerThreadMain(std::shared_ptr<Peer> peer)
             auto end = std::chrono::system_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>( end - start ).count();
 
-            std::cout << "end [" << peer->serverId << state <<  "]:" << duration << std::endl;
+            // std::cout << "end [" << peer->serverId << state <<  "]:" << duration << std::endl;
         }
     }
 
@@ -2303,6 +2389,7 @@ RaftConsensus::appendEntries(std::unique_lock<Mutex>& lockGuard,
     Protocol::Raft::AppendEntries::Response response;
     TimePoint start = Clock::now();
     uint64_t epoch = currentEpoch;
+    usleep(30*1000); // simulate network latency
     Peer::CallStatus status = peer.callRPC(
                 Protocol::Raft::OpCode::APPEND_ENTRIES, // LEADER: append entries to follower (peer) (also change commit)
                 request, response,
@@ -2752,6 +2839,38 @@ RaftConsensus::readSnapshot()
     snapshotReader = std::move(reader);
 }
 
+
+
+std::pair<RaftConsensus::ClientResult, uint64_t>
+RaftConsensus::special_replicateEntry(std::vector<Luggage*> operations,
+                              std::unique_lock<Mutex>& lockGuard) {
+    std::vector<const Log::Entry*> entries;
+    entries.clear();
+    if (state == State::LEADER) {
+
+        for (unsigned long i = 0; i < operations.size(); i++) {
+            operations.at(i)->entry.set_term(currentTerm);
+            operations.at(i)->entry.set_cluster_time(clusterClock.leaderStamp());
+            entries.push_back(&operations.at(i)->entry);
+        }
+
+        append(entries); // LEADER: appends to its local log
+        uint64_t index = log->getLastLogIndex();
+        //while (!exiting && currentTerm == entry.term()) {
+        while (!exiting) {
+            if (commitIndex >= index) { // LEADER: something else is changing the commitIndex (as it receives confirmation from the followers)
+                VERBOSE("replicate succeeded");
+                return {ClientResult::SUCCESS, index};
+            }
+            stateChanged.wait(lockGuard); // LEADER: waits for ?a broadcast from?
+        }
+    }
+
+
+    return {ClientResult::NOT_LEADER, 0};
+}
+
+
 std::pair<RaftConsensus::ClientResult, uint64_t>
 RaftConsensus::replicateEntry(Log::Entry& entry,
                               std::unique_lock<Mutex>& lockGuard)
@@ -2759,11 +2878,14 @@ RaftConsensus::replicateEntry(Log::Entry& entry,
     if (state == State::LEADER) {
         entry.set_term(currentTerm);
         entry.set_cluster_time(clusterClock.leaderStamp());
-        append({&entry}); // LEADER: appends to its local log
+        append({&entry});
+        // start
+        // LEADER: appends to its local log
         uint64_t index = log->getLastLogIndex();
         while (!exiting && currentTerm == entry.term()) {
             if (commitIndex >= index) { // LEADER: something else is changing the commitIndex (as it receives confirmation from the followers)
                 VERBOSE("replicate succeeded");
+                // end
                 return {ClientResult::SUCCESS, index};
             }
             stateChanged.wait(lockGuard); // LEADER: waits for ?a broadcast from?

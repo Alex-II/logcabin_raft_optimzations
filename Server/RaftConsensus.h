@@ -31,6 +31,7 @@
 #include "../Core/Mutex.h"
 #include "../Core/Time.h"
 #include "../RPC/ClientRPC.h"
+#include "../RPC/ServerRPC.h"
 #include "../Storage/Layout.h"
 #include "../Storage/Log.h"
 #include "../Storage/SnapshotFile.h"
@@ -893,6 +894,28 @@ class RaftConsensus {
     typedef RaftConsensusInternal::Clock Clock;
     typedef RaftConsensusInternal::TimePoint TimePoint;
 
+
+    struct Luggage{
+        Luggage(Core::Buffer * _operation, LogCabin::RPC::ServerRPC * _rpc,
+                Protocol::Client::StateMachineCommand::Request _request,
+                Protocol::Client::StateMachineCommand::Response _response): operation(_operation),
+                rpc(_rpc), request(_request), response(_response){
+//            operation = _operation;
+//            rpc = _rpc;
+//            request = _request;
+//            response = _response;
+        }
+        Protocol::Client::StateMachineCommand::Request request;
+        Protocol::Client::StateMachineCommand::Response response;
+        LogCabin::RPC::ServerRPC * rpc;
+        Core::Buffer * operation;
+        LogCabin::Storage::Log::Entry entry;
+    };
+
+    bool special_thread_strated = false;
+    std::mutex oplock;
+    std::vector<Luggage*> operations;
+
     /**
      * This is returned by getNextEntry().
      */
@@ -1093,6 +1116,10 @@ class RaftConsensus {
      *      log.
      */
     std::pair<ClientResult, uint64_t> replicate(const Core::Buffer& operation);
+//    std::pair<ClientResult, uint64_t> special_replicate();
+//    std::pair<ClientResult, uint64_t> special_prereplicate(Core::Buffer& operation, LogCabin::RPC::ServerRPC * rpc,
+//                                                        Protocol::Client::StateMachineCommand::Request request,
+//                                                        Protocol::Client::StateMachineCommand::Response response);
 
     /**
      * Change the cluster's configuration.
@@ -1161,7 +1188,9 @@ class RaftConsensus {
      */
     friend std::ostream& operator<<(std::ostream& os,
                                     const RaftConsensus& raft);
-
+    std::pair<ClientResult, uint64_t>
+    special_replicateEntry(std::vector<Luggage*> operations,
+                           std::unique_lock<Mutex>& lockGuard);
   private:
     /**
      * See #state.
@@ -1339,6 +1368,8 @@ class RaftConsensus {
     replicateEntry(Storage::Log::Entry& entry,
                    std::unique_lock<Mutex>& lockGuard);
 
+
+
     /**
      * Send a RequestVote RPC to the server. This is used by candidates to
      * request a server's vote and by new leaders to retrieve information about
@@ -1465,6 +1496,13 @@ class RaftConsensus {
      */
     std::string serverAddresses;
 
+    /**
+    * This class behaves mostly like a monitor. This protects all the state in
+    * this class and almost all of the Peer class (with some
+    * documented exceptions).
+    */
+    mutable Mutex mutex;
+
   private:
 
     /**
@@ -1482,12 +1520,7 @@ class RaftConsensus {
      */
     Client::SessionManager sessionManager;
 
-    /**
-     * This class behaves mostly like a monitor. This protects all the state in
-     * this class and almost all of the Peer class (with some
-     * documented exceptions).
-     */
-    mutable Mutex mutex;
+
 
     /**
      * Notified when basically anything changes. Specifically, this is notified

@@ -398,7 +398,8 @@ main(int argc, char** argv)
             case Command::WRITE:
 
                 //tree.writeEx(path, std::string(file_contents));
-                tree.writeEx(path, readStdin());
+                //tree.writeEx(path, readStdin());
+                tree.writeEx(path, std::string("words words words"));
                 break;
             case Command::READ: {
                 std::string contents = tree.readEx(path);

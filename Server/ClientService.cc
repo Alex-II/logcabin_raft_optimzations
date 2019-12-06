@@ -25,7 +25,10 @@
 #include "../Server/ClientService.h"
 #include "../Server/Globals.h"
 #include "../Server/StateMachine.h"
+#include "RaftConsensus.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 namespace LogCabin {
 namespace Server {
 
@@ -62,8 +65,12 @@ ClientService::handleRPC(RPC::ServerRPC rpc)
             setConfiguration(std::move(rpc));
             break;
         case OpCode::STATE_MACHINE_COMMAND:
-            globals.serverStats.dumpToDebugLog();
+            // globals.serverStats.dumpToDebugLog();
             stateMachineCommand(std::move(rpc));
+            break;
+        case OpCode::SUPER_SPECIAL_MACHINE_COMMAND:
+            // globals.serverStats.dumpToDebugLog();
+            stateSuperSpecialMachineCommand(std::move(rpc));
             break;
         case OpCode::STATE_MACHINE_QUERY:
             stateMachineQuery(std::move(rpc));
@@ -151,6 +158,93 @@ ClientService::setConfiguration(RPC::ServerRPC rpc)
     rpc.reply(response);
 }
 
+
+void
+ClientService::superSpecialMachineCommandProcessing(){
+    std::vector<LogCabin::Server::RaftConsensus::Luggage*> operations_to_process;
+    while (true) {
+        operations_to_process.clear();
+        std::unique_lock<LogCabin::Server::RaftConsensusInternal::Mutex> lockGuard(globals.raft->mutex); // LEADER: this seems to impose sequential processing
+
+        globals.raft->oplock.lock();
+        for (unsigned long i = 0; i < globals.raft->operations.size(); i++) {
+            operations_to_process.push_back(globals.raft->operations.at(i));
+        }
+        globals.raft->operations.clear();
+        globals.raft->oplock.unlock();
+
+        for (unsigned long i = 0; i < operations_to_process.size(); i++) {
+            operations_to_process.at(i)->entry.set_type(Protocol::Raft::EntryType::DATA);
+//            operations_to_process.at(i)->entry.set_data(operations_to_process.at(i)->operation->getData()
+//                    , operations_to_process.at(i)->operation->getLength());
+            operations_to_process.at(i)->entry.set_data("wordswordswords", 15);
+        }
+
+        auto result = globals.raft->special_replicateEntry(operations_to_process, lockGuard);
+       if (result.first == LogCabin::Server::RaftConsensus::ClientResult::RETRY || result.first == LogCabin::Server::RaftConsensus::ClientResult::NOT_LEADER) {
+            Protocol::Client::Error error;
+            error.set_error_code(Protocol::Client::Error::NOT_LEADER);
+            std::string leaderHint = globals.raft->getLeaderHint();
+            if (!leaderHint.empty())
+                error.set_leader_hint(leaderHint);
+            for(unsigned long i = 0; i < operations_to_process.size(); i++){
+                operations_to_process.at(i)->rpc->returnError(error);
+            }
+        } else {
+            for(unsigned long i = 0; i < operations_to_process.size(); i++){
+                uint64_t logIndex = result.second;
+                if (!globals.stateMachine->waitForResponse(logIndex, operations_to_process.at(i)->request,
+                                                           operations_to_process.at(i)->response)) {
+                    operations_to_process.at(i)->rpc->rejectInvalidRequest();
+                } else {
+                    operations_to_process.at(i)->rpc->reply(operations_to_process.at(i)->response);
+                }
+            }
+        }
+//
+//
+//
+//        entry.set_type(Protocol::Raft::EntryType::DATA);
+//        entry.set_data(operation.getData(), operation.getLength());
+//        return replicateEntry(entry, lockGuard);
+//    }
+//
+//    if (result.first == Result::RETRY || result.first == Result::NOT_LEADER) {
+//        Protocol::Client::Error error;
+//        error.set_error_code(Protocol::Client::Error::NOT_LEADER);
+//        std::string leaderHint = globals.raft->getLeaderHint();
+//        if (!leaderHint.empty())
+//            error.set_leader_hint(leaderHint);
+//        rpc.returnError(error);
+//        return;
+//    }
+//    assert(result.first == Result::SUCCESS);
+//    uint64_t logIndex = result.second;
+//    if (!globals.stateMachine->waitForResponse(logIndex, request, response)) {
+//        rpc.rejectInvalidRequest();
+//        return;
+//    }
+//    rpc.reply(response);
+    }
+}
+
+void
+ClientService::stateSuperSpecialMachineCommand(RPC::ServerRPC rpc)
+{
+    PRELUDE(StateMachineCommand);
+    Core::Buffer cmdBuffer;
+    rpc.getRequest(cmdBuffer);
+
+    globals.raft->oplock.lock();
+    if (!globals.raft->special_thread_strated){
+        std::thread(&ClientService::superSpecialMachineCommandProcessing, this).detach();
+        globals.raft->special_thread_strated = true;
+    }
+    auto * lug = new LogCabin::Server::RaftConsensus::Luggage(&cmdBuffer, &rpc, request, response);
+    globals.raft->operations.push_back(lug);
+    globals.raft->oplock.unlock();
+}
+
 void
 ClientService::stateMachineCommand(RPC::ServerRPC rpc)
 {
@@ -180,6 +274,7 @@ ClientService::stateMachineCommand(RPC::ServerRPC rpc)
         rpc.rejectInvalidRequest();
         return;
     }
+//    response.mutable_open_session()-> set_client_id(logIndex);
     rpc.reply(response);
 }
 
@@ -251,3 +346,5 @@ ClientService::verifyRecipient(RPC::ServerRPC rpc)
 
 } // namespace LogCabin::Server
 } // namespace LogCabin
+
+#pragma clang diagnostic pop

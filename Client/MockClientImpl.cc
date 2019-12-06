@@ -80,7 +80,7 @@ class TreeLeaderRPC : public LeaderRPCBase {
                     tree, qrequest.tree(), *qresponse.mutable_tree());
                 return Status::OK;
             }
-        } else if (opCode == OpCode::STATE_MACHINE_COMMAND) {
+        } else if (opCode == OpCode::STATE_MACHINE_COMMAND || opCode == OpCode::SUPER_SPECIAL_MACHINE_COMMAND) {
             PC::StateMachineCommand::Request crequest;
             crequest.CopyFrom(request);
             auto& cresponse =

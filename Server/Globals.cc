@@ -44,6 +44,7 @@ void
 Globals::ExitHandler::handleSignalEvent()
 {
     NOTICE("%s: shutting down", strsignal(signalNumber));
+    std::cout << "SIGNAL RECEIVED: " << strsignal(signalNumber) << std::endl;
     eventLoop.exit();
 }
 

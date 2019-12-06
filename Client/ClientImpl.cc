@@ -219,16 +219,18 @@ treeCall(LeaderRPCBase& leaderRPC,
         } else {
 
 
-            std::cout << "TreeOps about to call leader with: " << Core::StringUtil::trim(
-                    Core::ProtoBuf::dumpString(request)).c_str() << std::endl;
-            status = leaderRPC.call(Protocol::Client::OpCode::STATE_MACHINE_COMMAND,
+//            std::cout << "TreeOps about to call leader with: " << Core::StringUtil::trim(
+//                    Core::ProtoBuf::dumpString(request)).c_str() << std::endl;
+//            status = leaderRPC.call(Protocol::Client::OpCode::STATE_MACHINE_COMMAND,
+//                                    crequest, cresponse, timeout);
+            status = leaderRPC.call(Protocol::Client::OpCode::SUPER_SPECIAL_MACHINE_COMMAND,
                                     crequest, cresponse, timeout);
         }
 
         switch (status) {
             case LeaderRPC::Status::OK:
 
-                std::cout << "OK WROTE" << std::endl;
+                // std::cout << "OK WROTE" << std::endl;
 
                 response = *cresponse.mutable_tree();
                 VERBOSE("Reply to read-write tree command:\n%s",
@@ -822,7 +824,13 @@ ClientImpl::write(const std::string& path,
 //    int uspause = std::stoi(env_us_pause);
     //std::cout << "Will pause for " << uspause << " between writes" << std::endl;
 
-    while(true){
+    int iter=  0;
+    int count_num = 1  ;
+    double count_sum = 0;
+    uint64_t * counts = new uint64_t[count_num]();
+    while(true) {
+        iter++;
+        auto start = std::chrono::high_resolution_clock::now();
         std::string realPath;
         Result result = canonicalize(path, workingDirectory, realPath);
         if (result.status != Status::OK)
@@ -837,11 +845,21 @@ ClientImpl::write(const std::string& path,
         treeCall(*leaderRPC,
                  request, response, timeout);
         exactlyOnceRPCHelper.doneWithRPC(request.exactly_once());
-    }
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = end - start;
 
-//    if (response.status() != Protocol::Client::Status::OK)
-//        return treeError(response);
-    return Result();
+        uint64_t elapsedMs = uint64_t(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
+        count_sum += elapsedMs;
+        usleep(100 * 1000);
+        if(iter == count_num){
+            std::cout << count_sum / count_num << std::endl;
+            iter = 0;
+            count_sum = 0;
+        }
+//        if (response.status() != Protocol::Client::Status::OK)
+//            return treeError(response);
+//        return Result();
+    }
 }
 
 Result
