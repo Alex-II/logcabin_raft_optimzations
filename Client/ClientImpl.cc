@@ -223,7 +223,7 @@ treeCall(LeaderRPCBase& leaderRPC,
 //                    Core::ProtoBuf::dumpString(request)).c_str() << std::endl;
 //            status = leaderRPC.call(Protocol::Client::OpCode::STATE_MACHINE_COMMAND,
 //                                    crequest, cresponse, timeout);
-            status = leaderRPC.call(Protocol::Client::OpCode::SUPER_SPECIAL_MACHINE_COMMAND,
+            status = leaderRPC.call(Protocol::Client::OpCode::STATE_MACHINE_COMMAND,
                                     crequest, cresponse, timeout);
         }
 
@@ -850,7 +850,7 @@ ClientImpl::write(const std::string& path,
 
         uint64_t elapsedMs = uint64_t(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
         count_sum += elapsedMs;
-        usleep(100 * 1000);
+
         if(iter == count_num){
             std::cout << count_sum / count_num << std::endl;
             iter = 0;
